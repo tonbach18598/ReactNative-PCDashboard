@@ -25,4 +25,4 @@ export default class SigninButton extends Component {
     }
 }
 
-SigninButton.propTypes = { text: PropTypes.string.isRequired, style:PropTypes.style.isRequired, onPress:PropTypes.onPress.isRequired }
+SigninButton.propTypes = { text: PropTypes.string.isRequired, style:PropTypes.style, onPress:PropTypes.onPress }
