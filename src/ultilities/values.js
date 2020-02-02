@@ -1,4 +1,4 @@
-class Values {
+export default class Values {
   static get DEPARTMENT() { return 'Bộ môn' }
   static get CLASS() { return 'Lớp học' }
   static get CONTACT() { return 'Liên hệ' }
@@ -39,4 +39,3 @@ class Values {
   static get POST_POST() { return 'Đăng bài' }
   static get EDIT_POST() { return 'Sửa bài' }
 }
-export default Values

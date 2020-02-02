@@ -1,4 +1,4 @@
-class Configs {
+export default class Configs {
   static get currentVersion() { return 'Phiên bản: Beta 1.0.0' }
   static get baseUrl() { return 'http://pcdashboard.herokuapp.com' }
   static get homeUrl() { return 'http://www.phys.hcmus.edu.vn/vlth' }
@@ -11,4 +11,3 @@ class Configs {
   static get forgetPath() { return '/user/forget-password/' }
   static get schedulePath() { return '/schedule/' }
 }
-export default Configs

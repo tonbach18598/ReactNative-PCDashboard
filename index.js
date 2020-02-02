@@ -3,7 +3,7 @@
  */
 
 import {AppRegistry} from 'react-native';
-import SplassScreen from './src/screens/splash_screen';
+import App from './src/App';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => SplassScreen);
+AppRegistry.registerComponent(appName, () => App);
