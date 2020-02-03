@@ -1,6 +1,7 @@
 export default class Colors {
     static get black() { return '#000000' }
     static get black12() { return '0x1f000000' }
+    static get black54() { return '0x8a000000' }
     static get grey() { return '#9e9e9e' }
     static get grey200() { return '#eeeeee' }
     static get white() { return '#ffffff' }
@@ -18,4 +19,5 @@ export default class Colors {
     static get greenAccent() { return '#69f0ae' }
     static get red() { return 'Ff44336' }
     static get amber() { return '#ffc107' }
+    static get shadow() { return '#000' }
 }
