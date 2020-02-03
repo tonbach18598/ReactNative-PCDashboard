@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { TextInput } from "react-native";
+import { TextInput, Dimensions, View } from "react-native";
 import PropTypes from "prop-types";
+import Colors from "../ultilities/colors";
+import {Icon} from 'react-native-elements'
 
 export default class SigninTextInput extends Component {
     constructor(props) {
@@ -9,19 +11,21 @@ export default class SigninTextInput extends Component {
 
     render() {
         return (
-            <TextInput style={{
-                shadowColor: "#000",
-                shadowOffset: {
-                    width: 0,
-                    height: 10,
-                },
-                shadowOpacity: 0.51,
-                shadowRadius: 13.16,
-                elevation: 20,
-            }}
-                placeholder={this.props.placeholder} />
+            <View style={[{
+                backgroundColor:Colors.white, borderRadius:30, shadowColor: Colors.shadow,
+                shadowOffset: {width: 0,height: 5,},
+                shadowOpacity: 0.34,shadowRadius: 6.27, elevation: 10, width: Dimensions.get('window').width/1.2, flexDirection:'row', justifyContent:'center', alignItems:'center'},
+                this.props.style]}>
+                <View style={{marginLeft:20, marginRight:20}}><Icon
+                    
+                    name={this.props.icon}
+                    color={Colors.lightBlue}/></View>
+                <TextInput
+                    style={{flex:1, marginTop:5, marginBottom: 5}}
+                    placeholder={this.props.placeholder}
+                    selectionColor={Colors.orange} />
+            </View>
         );
     }
 }
-
-SigninTextInput.propTypes = { placeholder: PropTypes.string.isRequired }
+SigninTextInput.propTypes = { icon:PropTypes.string.isRequired, placeholder: PropTypes.string.isRequired, style:PropTypes.style }
