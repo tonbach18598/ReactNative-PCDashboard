@@ -18,7 +18,8 @@ export default class SigninButton extends Component {
                     width: Dimensions.get('window').width / 1.2, height: 50, borderRadius: 30, shadowColor: Colors.shadow,
                     shadowOffset: { width: 0, height: 2, },
                     shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5,
-                }}>
+                }}
+                onPress={this.props.onPress}>
                 <LinearGradient
                     style={{ opatity: 0.9, borderRadius: 30, alignItems: 'center', paddingTop: 10, paddingBottom: 10 }}
                     start={{ x: 0.0, y: 0.0 }}

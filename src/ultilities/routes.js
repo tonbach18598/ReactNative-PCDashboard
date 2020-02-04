@@ -4,6 +4,7 @@ import SigninScreen from '../screens/signin_screen'
 import ForgetScreen from '../screens/forget_screen'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
+import DashboardScreen from '../screens/dashboard_screen'
 
 export default class Routes {
     static get splashRoute() { return 'Splash' }
@@ -34,11 +35,10 @@ const SigninNavigator = createStackNavigator(
 )
 const DashboardNavigator = createStackNavigator(
     {
-        Splash: SplashScreen,
-        SigninNavigator: SigninNavigator,
+        Dashboard: DashboardScreen,
     },
     {
-        initialRouteName: Routes.splashRoute,
+        initialRouteName: Routes.dashboardRoute,
     }
 )
 const AppNavigator = createSwitchNavigator(
