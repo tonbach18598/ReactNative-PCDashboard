@@ -7,6 +7,7 @@ import SigninButton from '../components/signin_button'
 import ForgetPasswordButton from '../components/forget_password_button'
 import Routes from '../ultilities/routes';
 import { NavigationActions } from 'react-navigation';
+
 export default class SigninScreen extends Component {
     render() {
         return (
@@ -29,7 +30,7 @@ export default class SigninScreen extends Component {
             <View>
                 <SigninButton text={Values.SIGN_IN.toUpperCase() } onPress={()=>{
                     console.log('navigate to dashboard')
-                    this.props.navigation.dispatch(NavigationActions.navigate({routeName:'DashboardNavigator',action:NavigationActions.navigate({routeName:'Dashboard'})}))
+                    this.props.navigation.dispatch(NavigationActions.navigate({routeName:'DashboardNavigator'}))
                     }}/>
                 <View style={{width:'100%', height:Dimensions.get('window').height/10}}/>
             </View>

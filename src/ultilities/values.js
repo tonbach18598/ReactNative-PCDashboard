@@ -1,5 +1,6 @@
 export default class Values {
   static get DEPARTMENT() { return 'Bộ môn' }
+  static get SESSION() { return 'Niên khoá' }
   static get CLASS() { return 'Lớp học' }
   static get CONTACT() { return 'Liên hệ' }
   static get CHAT() { return 'Trò chuyện' }

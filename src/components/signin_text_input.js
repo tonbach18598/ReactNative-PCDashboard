@@ -6,7 +6,7 @@ import {Icon} from 'react-native-elements'
 
 export default class SigninTextInput extends Component {
     constructor(props) {
-        super(props);
+        super(props)
     }
 
     render() {

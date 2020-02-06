@@ -3,7 +3,7 @@ import SplashScreen from '../screens/splash_screen'
 import SigninScreen from '../screens/signin_screen'
 import ForgetScreen from '../screens/forget_screen'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
-import {createStackNavigator} from 'react-navigation-stack'
+import { createStackNavigator } from 'react-navigation-stack'
 import DashboardScreen from '../screens/dashboard_screen'
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import ViewPagerAdapter from 'react-native-tab-view-viewpager-adapter';
@@ -19,7 +19,12 @@ import DeveloperScreen from '../screens/developer_screen'
 import ClassScreen from '../screens/class_screen'
 import PostScreen from '../screens/post_screen'
 import EditScreen from '../screens/edit_screen'
+import UserScreen from '../screens/user_screen'
 import CommentScreen from '../screens/comment_screen'
+import Colors from './colors'
+import { Icon } from 'react-native-elements'
+import Values from './values'
+import CustomTabItem from '../components/custom_tab_item'
 
 export default class Routes {
     static get splashRoute() { return 'Splash' }
@@ -40,20 +45,114 @@ export default class Routes {
     static get changeRoute() { return 'Change' }
     static get developerRoute() { return 'Developer' }
     static get userRoute() { return 'User' }
-    static get signinNavigator(){ return 'SigninNavigator'}
-    static get dashboardNavigator(){ return 'DashboardNavigator'}
-    static get tabNavigator(){ return 'TabNavigator'}
-    static get drawerNavigator(){ return 'DrawerNavigator'}
+    static get signinNavigator() { return 'SigninNavigator' }
+    static get dashboardNavigator() { return 'DashboardNavigator' }
+    static get tabNavigator() { return 'TabNavigator' }
+    static get drawerNavigator() { return 'DrawerNavigator' }
 }
 
-const AppNavigator = createSwitchNavigator(
+const TabNavigator = createMaterialTopTabNavigator(
     {
-        Splash: SplashScreen,
-        SigninNavigator: SigninNavigator,
-        DashboardNavigator:DashboardNavigator
+        Department: DepartmentScreen,
+        Session: SessionScreen,
+        Contact: ContactScreen,
+        Teach: TeachScreen
     },
     {
-        initialRouteName: Routes.splashRoute,
+        defaultNavigationOptions: ({ navigation }) => ({
+            tabBarIcon: ({ focused, horizontal,tintColor }) => {
+                const { routeName } = navigation.state;
+                let icon;
+                if (routeName === Routes.departmentRoute) {
+                    icon = 'fiber_news';
+                } else if (routeName === Routes.sessionRoute) {
+                    icon = 'new_releases';
+                } else if (routeName === Routes.contactRoute) {
+                    icon = 'public';
+                } else if (routeName === Routes.teachRoute) {
+                    icon = 'school';
+                }
+                return <Icon name={icon} color={tintColor}/>;
+            },
+        }),
+        // tabBarComponent: (props) => {
+        //     const {
+        //         navigation: {state: {index, routes}},
+        //         style,
+        //         activeTintColor,
+        //         inactiveTintColor,
+        //         renderIcon,
+        //         jumpTo
+        //     } = props;
+        //     return (
+        //         <View style={{
+        //             flexDirection: 'row',
+        //             height: 50,
+        //             width: '100%',
+        //             ...style
+        //         }}>
+        //             {
+        //                 routes.map((route, idx) => (
+        //                     <View
+        //                         key={route.key}
+        //                         style={{
+        //                             flex: 1,
+        //                             alignItems: 'center',
+        //                             justifyContent: 'center'
+        //                         }}
+        //                     >
+        //                         <TouchableOpacity
+        //                             onPress={() => jumpTo(route.key)}
+        //                         >
+        //                             {renderIcon({
+        //                                 route,
+        //                                 focused: index === idx,
+        //                                 tintColor: index === idx ? activeTintColor : inactiveTintColor
+        //                             })}
+        //                         </TouchableOpacity>
+        //                     </View>
+        //                 ))
+        //             }
+        //         </View>
+        //     );
+        // },
+        initialRouteName: Routes.departmentRoute,
+        pagerComponent: ViewPagerAdapter,
+        tabBarOptions: {
+            indicatorStyle: { backgroundColor: Colors.blueAccent },
+            activeTintColor: Colors.blueAccent,
+            inactiveTintColor: Colors.deepOrange,
+            showLabel:true,
+            style:{
+                backgroundColor:Colors.white
+            },
+        },
+    }
+)
+
+const DrawerNavigator = createDrawerNavigator(
+    {
+        Home: HomeScreen,
+        Update: UpdateScreen,
+        Change: ChangeScreen,
+        Developer: DeveloperScreen
+    }
+)
+
+const DashboardNavigator = createStackNavigator(
+    {
+        Dashboard: DashboardScreen,
+        TabNavigator: TabNavigator,
+        DrawerNavigator: DrawerNavigator,
+        Class: ClassScreen,
+        Post: PostScreen,
+        Edit: EditScreen,
+        Comment: CommentScreen,
+        User: UserScreen
+    },
+    {
+        initialRouteName: Routes.DashboardScreen,
+        headerMode: 'none'
     }
 )
 
@@ -64,44 +163,18 @@ const SigninNavigator = createStackNavigator(
     },
     {
         initialRouteName: Routes.signinRoute,
-        headerMode:'none'
+        headerMode: 'none'
     }
 )
 
-const DashboardNavigator = createStackNavigator(
+const AppNavigator = createSwitchNavigator(
     {
-        Dashboard: DashboardScreen,
-        TabNavigator: TabNavigator,
-        DrawerNavigator: DrawerNavigator,
-        Class:ClassScreen,
-        Post:PostScreen,
-        Edit:EditScreen,
-        Comment:CommentScreen,
-        User:UserScreen
+        Splash: SplashScreen,
+        SigninNavigator: SigninNavigator,
+        DashboardNavigator: DashboardNavigator
     },
     {
-        initialRouteName: Routes.dashboardRoute,
-    }
-)
-
-const TabNavigator = createMaterialTopTabNavigator(
-    {
-        Department:DepartmentScreen,
-        Session:SessionScreen,
-        Contact:ContactScreen,
-        Teach:TeachScreen
-    },
-    {
-        pagerComponent:ViewPagerAdapter
-    }
-)
-
-const DrawerNavigator = createDrawerNavigator(
-    {
-        Home:HomeScreen,
-        Update:UpdateScreen,
-        Change:ChangeScreen,
-        Developer:DeveloperScreen
+        initialRouteName: Routes.splashRoute,
     }
 )
 
