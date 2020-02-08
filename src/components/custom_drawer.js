@@ -55,7 +55,6 @@ export default class CustomDrawer extends Component {
           onPress={this.navigateToScreen(Routes.signinNavigator)}
           title={Values.SIGN_OUT}
           leftIcon={{ name: 'exit-to-app', color: Colors.lightBlue }}
-          bottomDivider
         />
         <Text>{Configs.currentVersion}</Text>
       </View>

@@ -15,7 +15,7 @@ export default class CustomHeader extends Component {
     return (
       <Header
         statusBarProps={{translucent:true}}
-        leftComponent={<Button icon={<Icon name={this.props.leftIcon} color={Colors.white}/>} type="clear"/>}
+        leftComponent={<Button icon={<Icon name={this.props.leftIcon} color={Colors.white}/>} type="clear" onPress={this.props.onPress} />}
         centerComponent={{ text: this.props.title, style: { color: Colors.white,fontWeight:'bold' } }}
         ViewComponent={LinearGradient}
         linearGradientProps={{
@@ -28,4 +28,4 @@ export default class CustomHeader extends Component {
   }
 }
 
-CustomHeader.propTypes = { leftIcon: PropTypes.string.isRequired, title: PropTypes.string }
+CustomHeader.propTypes = { leftIcon: PropTypes.string.isRequired, title: PropTypes.string, onPress:PropTypes.func.isRequired }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import SplashScreen from '../screens/splash_screen'
 import SigninScreen from '../screens/signin_screen'
 import ForgetScreen from '../screens/forget_screen'
-import { createAppContainer, createSwitchNavigator } from 'react-navigation'
+import { createAppContainer, createSwitchNavigator, NavigationActions } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 import DashboardScreen from '../screens/dashboard_screen'
 import { createMaterialTopTabNavigator, createBottomTabNavigator } from 'react-navigation-tabs';
@@ -24,8 +24,10 @@ import CommentScreen from '../screens/comment_screen'
 import Colors from './colors'
 import { Icon } from 'react-native-elements'
 import Values from './values'
-import CustomTabItem from '../components/custom_tab_item'
+import CustomTabBar, {CustomTab} from '../components/custom_tab'
 import CustomDrawer from '../components/custom_drawer'
+import { View,Text, SafeAreaView } from 'react-native'
+import CustomHeader from '../components/custom_header'
 
 export default class Routes {
     static get splashRoute() { return 'Splash' }
@@ -53,44 +55,37 @@ export default class Routes {
     static get featureNavigator() { return 'featureNavigator' }
 }
 
-export const TabNavigator = createBottomTabNavigator(
+export const TabNavigator = createMaterialTopTabNavigator(
     {
         Department: {
             screen:DepartmentScreen,
-            navigationOptions:{
-                title:Values.DEPARTMENT,
-                tabBarIcon:({tintColor})=><Icon name='fiber-new' color={Colors.lightBlue}/>
-            }
+           
         },
         Session: {
             screen:SessionScreen,
-            navigationOptions:{
-                title:Values.SESSION,
-                tabBarIcon:({tintColor})=><Icon name='people' color={Colors.lightBlue}/>
-            }
+            
         },
         Contact: {
             screen:ContactScreen,
-            navigationOptions:{
-                title:Values.CONTACT,
-                tabBarIcon:({tintColor})=><Icon name='public' color={Colors.lightBlue}/>
-            }
+            
         },
         Teach: {
             screen:TeachScreen,
-            navigationOptions:{
-                title:Values.TEACH,
-                tabBarIcon:({tintColor})=><Icon name='school' color={Colors.lightBlue}/>
-            }
+           
         }
     },
     {
         initialRouteName:Routes.departmentRoute,
         headerMode:'none',
+        tabBarComponent:CustomTab
+        // tabBarComponent:props => (<SafeAreaView>
+        //     <CustomHeader leftIcon='menu' onPress={()=>{}} />
+        //     <CustomTab {...props} />
+        // </SafeAreaView>)
+        // pagerComponent: ViewPagerAdapter,
     }
     // {
     //     initialRouteName: Routes.departmentRoute,
-    //     pagerComponent: ViewPagerAdapter,
     //     tabBarOptions: {
     //         indicatorStyle: { backgroundColor: Colors.blueAccent },
     //         activeTintColor: Colors.blueAccent,
@@ -120,7 +115,12 @@ const DashboardNavigator = createStackNavigator(
         Home:HomeScreen,
         Update:UpdateScreen,
         Change:ChangeScreen,
-        Developer:DeveloperScreen
+        Developer:DeveloperScreen,
+        Class:ClassScreen,
+        Post:PostScreen,
+        Edit:EditScreen,
+        User:UserScreen,
+        Comment:CommentScreen
     },
     {
         initialRouteName:Routes.DrawerNavigator,
@@ -147,6 +147,7 @@ const AppNavigator = createSwitchNavigator(
     },
     {
         initialRouteName: Routes.splashRoute,
+        headerMode:'screen'
     }
 )
 
