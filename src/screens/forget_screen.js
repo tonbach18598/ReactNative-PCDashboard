@@ -16,7 +16,7 @@ export default class ForgetScreen extends Component {
                 <SigninTextInput
                     icon='person'
                     placeholder={Values.ACCOUNT}
-                    style={{marginTop:10, marginBottom:15}}/>
+                    style={{marginTop:10, marginBottom:20}}/>
                 <ForgetPasswordButton style={{marginRight:20}}text={Values.BACK} onPress={()=>this.props.navigation.goBack()}/>
             </View>
             <View>

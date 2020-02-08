@@ -21,7 +21,7 @@ export default class SigninScreen extends Component {
                 <SigninTextInput
                     icon='lock'
                     placeholder={Values.PASSWORD}
-                    style={{marginTop:10, marginBottom:15}}/>
+                    style={{marginTop:10, marginBottom:20}}/>
                 <ForgetPasswordButton
                     style={{marginRight:20}}
                     text={Values.FORGET_PASSWORD}
@@ -32,7 +32,7 @@ export default class SigninScreen extends Component {
                     console.log('navigate to dashboard')
                     this.props.navigation.dispatch(NavigationActions.navigate({routeName:'DashboardNavigator'}))
                     }}/>
-                <View style={{width:'100%', height:Dimensions.get('window').height/10}}/>
+                <View style={{width:'100%', height:Dimensions.get('window').height/9}}/>
             </View>
         </View>)
     }

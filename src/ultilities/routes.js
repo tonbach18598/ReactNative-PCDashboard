@@ -24,10 +24,8 @@ import CommentScreen from '../screens/comment_screen'
 import Colors from './colors'
 import { Icon } from 'react-native-elements'
 import Values from './values'
-import CustomTabBar, {CustomTab} from '../components/custom_tab'
 import CustomDrawer from '../components/custom_drawer'
-import { View,Text, SafeAreaView } from 'react-native'
-import CustomHeader from '../components/custom_header'
+import { Text } from 'react-native'
 
 export default class Routes {
     static get splashRoute() { return 'Splash' }
@@ -55,52 +53,66 @@ export default class Routes {
     static get featureNavigator() { return 'featureNavigator' }
 }
 
-export const TabNavigator = createMaterialTopTabNavigator(
+const TabNavigator = createBottomTabNavigator(
     {
-        Department: {
-            screen:DepartmentScreen,
-           
-        },
-        Session: {
-            screen:SessionScreen,
-            
-        },
-        Contact: {
-            screen:ContactScreen,
-            
-        },
-        Teach: {
-            screen:TeachScreen,
-           
-        }
+        Department: DepartmentScreen,
+        Session: SessionScreen,
+        Contact: ContactScreen,
+        Teach: TeachScreen
     },
     {
         initialRouteName:Routes.departmentRoute,
         headerMode:'none',
-        tabBarComponent:CustomTab
-        // tabBarComponent:props => (<SafeAreaView>
-        //     <CustomHeader leftIcon='menu' onPress={()=>{}} />
-        //     <CustomTab {...props} />
-        // </SafeAreaView>)
-        // pagerComponent: ViewPagerAdapter,
+        // tabBarComponent:CustomTab,
+        defaultNavigationOptions: ({ navigation }) => ({
+        tabBarIcon: ({ tintColor }) => {
+            const { routeName } = navigation.state
+            let icon
+            if (routeName === Routes.departmentRoute) {
+                icon = 'fiber-new'
+            }
+            else if (routeName === Routes.sessionRoute) {
+                icon = 'people'
+            }
+            else if (routeName === Routes.contactRoute) {
+                icon = 'public'
+            }
+            else if (routeName === Routes.teachRoute) {
+                icon = 'school'
+            }
+
+            return <Icon name={icon} color={tintColor} />;
+        },
+        tabBarLabel:({tintColor}) => {
+            const { routeName } = navigation.state;
+            let title
+            if (routeName === Routes.departmentRoute) {
+                title = Values.DEPARTMENT
+            }
+            else if (routeName === Routes.sessionRoute) {
+                title = Values.SESSION
+            }
+            else if (routeName === Routes.contactRoute) {
+                title = Values.CONTACT
+            }
+            else if (routeName === Routes.teachRoute) {
+                title = Values.TEACH
+            }
+
+        return <Text style={{color:tintColor, fontSize:14, fontWeight:'bold', textAlign:'center'}}>{title}</Text>
+        }
+    }),
+        tabBarOptions:{
+            activeTintColor:Colors.blue,
+            inactiveTintColor:Colors.deepOrangeAccent,
+            style:{height:56}
+        }
     }
-    // {
-    //     initialRouteName: Routes.departmentRoute,
-    //     tabBarOptions: {
-    //         indicatorStyle: { backgroundColor: Colors.blueAccent },
-    //         activeTintColor: Colors.blueAccent,
-    //         inactiveTintColor: Colors.deepOrange,
-    //         showLabel:true,
-    //         style:{
-    //             backgroundColor:Colors.white
-    //         },
-    //     },
-    // }
 )
 
-export const DrawerNavigator = createDrawerNavigator(
+DrawerNavigator = createDrawerNavigator(
     {
-        TabNavigator:TabNavigator,
+        TabNavigator:TabNavigator
     },
     {
         initialRouteName:Routes.TabNavigator,
@@ -109,7 +121,7 @@ export const DrawerNavigator = createDrawerNavigator(
     }
 )
 
-const DashboardNavigator = createStackNavigator(
+DashboardNavigator = createStackNavigator(
     {
         DrawerNavigator: DrawerNavigator,
         Home:HomeScreen,
@@ -124,7 +136,7 @@ const DashboardNavigator = createStackNavigator(
     },
     {
         initialRouteName:Routes.DrawerNavigator,
-        headerMode: 'none'
+        headerMode: 'none',
     }
 )
 
@@ -147,7 +159,7 @@ const AppNavigator = createSwitchNavigator(
     },
     {
         initialRouteName: Routes.splashRoute,
-        headerMode:'screen'
+        headerMode:'none'
     }
 )
 

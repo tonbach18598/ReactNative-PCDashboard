@@ -9,7 +9,7 @@ export default class UpdateScreen extends Component{
     render(){
         return(
             <View>
-                <CustomHeader leftIcon={Platform.OS==='ios'?'arrow-back-ios':'arrow-back-ios'} title={Values.UPDATE_INFORMATION.toUpperCase()}/>
+                <CustomHeader leftIcon={'arrow-back'} title={Values.UPDATE_INFORMATION.toUpperCase()} onPress={()=>{this.props.navigation.goBack()}}/>
             </View>
         )
     }

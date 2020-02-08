@@ -10,7 +10,7 @@ export default class Colors {
     static get orange() { return '#ff9800' }
     static get orangeAccent() { return '#ffab40' }
     static get blueAccent() { return '#448aff' }
-    static get blue() { return '#2196f' }
+    static get blue() { return '#2196f3' }
     static get lightBlue() { return '#03a9f4' }
     static get lightBlueAccent() { return '#40c4ff' }
     static get green() { return '#4caf50' }

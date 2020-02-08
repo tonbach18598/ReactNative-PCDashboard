@@ -6,7 +6,7 @@ export default class Logo extends Component{
     render(){
         return (
             <LinearGradient
-                style={{ width: Dimensions.get('window').width, height: Dimensions.get('window').height/3, opacity:0.9 }}
+                style={{ width: Dimensions.get('window').width, height: Dimensions.get('window').height/3.5, opacity:0.9 }}
                 start={{ x: 0.0, y: 0.0 }}
                 end={{ x: 1.0, y: 1.0 }}
                 colors={['#ff5722', '#ff6e40', '#ff9800', '#ffab40', '#ffffff', '#40c4ff', '#03a9f4', '#2196f3', '#448aff']}>
