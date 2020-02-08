@@ -85,7 +85,11 @@ const Tab = ({ focusAnim, title, onPress }) => {
           }}
         >{title}</Animated.Text>
       </Animated.View> */}
+      <View style={{flexDirection:'column'}}>
+        <Icon name='home'/>
       <Text>TAB</Text>
+
+      </View>
     </TouchableOpacity>
   )
 }
