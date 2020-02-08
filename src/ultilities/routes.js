@@ -5,7 +5,7 @@ import ForgetScreen from '../screens/forget_screen'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 import DashboardScreen from '../screens/dashboard_screen'
-import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
+import { createMaterialTopTabNavigator, createBottomTabNavigator } from 'react-navigation-tabs';
 import ViewPagerAdapter from 'react-native-tab-view-viewpager-adapter';
 import DepartmentScreen from '../screens/department_screen'
 import SessionScreen from '../screens/session_screen'
@@ -25,6 +25,7 @@ import Colors from './colors'
 import { Icon } from 'react-native-elements'
 import Values from './values'
 import CustomTabItem from '../components/custom_tab_item'
+import CustomDrawer from '../components/custom_drawer'
 
 export default class Routes {
     static get splashRoute() { return 'Splash' }
@@ -49,109 +50,80 @@ export default class Routes {
     static get dashboardNavigator() { return 'DashboardNavigator' }
     static get tabNavigator() { return 'TabNavigator' }
     static get drawerNavigator() { return 'DrawerNavigator' }
+    static get featureNavigator() { return 'featureNavigator' }
 }
 
-const TabNavigator = createMaterialTopTabNavigator(
+export const TabNavigator = createBottomTabNavigator(
     {
-        Department: DepartmentScreen,
-        Session: SessionScreen,
-        Contact: ContactScreen,
-        Teach: TeachScreen
+        Department: {
+            screen:DepartmentScreen,
+            navigationOptions:{
+                title:Values.DEPARTMENT,
+                tabBarIcon:({tintColor})=><Icon name='fiber-new' color={Colors.lightBlue}/>
+            }
+        },
+        Session: {
+            screen:SessionScreen,
+            navigationOptions:{
+                title:Values.SESSION,
+                tabBarIcon:({tintColor})=><Icon name='people' color={Colors.lightBlue}/>
+            }
+        },
+        Contact: {
+            screen:ContactScreen,
+            navigationOptions:{
+                title:Values.CONTACT,
+                tabBarIcon:({tintColor})=><Icon name='public' color={Colors.lightBlue}/>
+            }
+        },
+        Teach: {
+            screen:TeachScreen,
+            navigationOptions:{
+                title:Values.TEACH,
+                tabBarIcon:({tintColor})=><Icon name='school' color={Colors.lightBlue}/>
+            }
+        }
     },
     {
-        defaultNavigationOptions: ({ navigation }) => ({
-            tabBarIcon: ({ focused, horizontal,tintColor }) => {
-                const { routeName } = navigation.state;
-                let icon;
-                if (routeName === Routes.departmentRoute) {
-                    icon = 'fiber_news';
-                } else if (routeName === Routes.sessionRoute) {
-                    icon = 'new_releases';
-                } else if (routeName === Routes.contactRoute) {
-                    icon = 'public';
-                } else if (routeName === Routes.teachRoute) {
-                    icon = 'school';
-                }
-                return <Icon name={icon} color={tintColor}/>;
-            },
-        }),
-        // tabBarComponent: (props) => {
-        //     const {
-        //         navigation: {state: {index, routes}},
-        //         style,
-        //         activeTintColor,
-        //         inactiveTintColor,
-        //         renderIcon,
-        //         jumpTo
-        //     } = props;
-        //     return (
-        //         <View style={{
-        //             flexDirection: 'row',
-        //             height: 50,
-        //             width: '100%',
-        //             ...style
-        //         }}>
-        //             {
-        //                 routes.map((route, idx) => (
-        //                     <View
-        //                         key={route.key}
-        //                         style={{
-        //                             flex: 1,
-        //                             alignItems: 'center',
-        //                             justifyContent: 'center'
-        //                         }}
-        //                     >
-        //                         <TouchableOpacity
-        //                             onPress={() => jumpTo(route.key)}
-        //                         >
-        //                             {renderIcon({
-        //                                 route,
-        //                                 focused: index === idx,
-        //                                 tintColor: index === idx ? activeTintColor : inactiveTintColor
-        //                             })}
-        //                         </TouchableOpacity>
-        //                     </View>
-        //                 ))
-        //             }
-        //         </View>
-        //     );
-        // },
-        initialRouteName: Routes.departmentRoute,
-        pagerComponent: ViewPagerAdapter,
-        tabBarOptions: {
-            indicatorStyle: { backgroundColor: Colors.blueAccent },
-            activeTintColor: Colors.blueAccent,
-            inactiveTintColor: Colors.deepOrange,
-            showLabel:true,
-            style:{
-                backgroundColor:Colors.white
-            },
-        },
+        initialRouteName:Routes.departmentRoute,
+        headerMode:'none',
     }
+    // {
+    //     initialRouteName: Routes.departmentRoute,
+    //     pagerComponent: ViewPagerAdapter,
+    //     tabBarOptions: {
+    //         indicatorStyle: { backgroundColor: Colors.blueAccent },
+    //         activeTintColor: Colors.blueAccent,
+    //         inactiveTintColor: Colors.deepOrange,
+    //         showLabel:true,
+    //         style:{
+    //             backgroundColor:Colors.white
+    //         },
+    //     },
+    // }
 )
 
-const DrawerNavigator = createDrawerNavigator(
+export const DrawerNavigator = createDrawerNavigator(
     {
-        Home: HomeScreen,
-        Update: UpdateScreen,
-        Change: ChangeScreen,
-        Developer: DeveloperScreen
+        TabNavigator:TabNavigator,
+    },
+    {
+        initialRouteName:Routes.TabNavigator,
+        headerMode:'none',
+        contentComponent:CustomDrawer,
     }
 )
 
 const DashboardNavigator = createStackNavigator(
     {
-        Dashboard: DashboardScreen,
-        TabNavigator: TabNavigator,
         DrawerNavigator: DrawerNavigator,
-        Class: ClassScreen,
-        Post: PostScreen,
-        Edit: EditScreen,
-        Comment: CommentScreen,
-        User: UserScreen
+        Home:HomeScreen,
+        Update:UpdateScreen,
+        Change:ChangeScreen,
+        Developer:DeveloperScreen
     },
     {
-        initialRouteName: Routes.DashboardScreen,
+        initialRouteName:Routes.DrawerNavigator,
         headerMode: 'none'
     }
 )

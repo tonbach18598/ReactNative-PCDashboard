@@ -1,14 +1,22 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
 import { Header } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient';
 import Colors from '../ultilities/colors';
+import PropTypes from 'prop-types';
+import { Button, Icon } from 'react-native-elements';
 
 export default class CustomHeader extends Component {
+
+  constructor(props) {
+    super(props);
+}
+
   render() {
     return (
       <Header
-        leftComponent={{icon:'menu',color:Colors.white}}
+        statusBarProps={{translucent:true}}
+        leftComponent={<Button icon={<Icon name={this.props.leftIcon} color={Colors.white}/>} type="clear"/>}
+        centerComponent={{ text: this.props.title, style: { color: Colors.white,fontWeight:'bold' } }}
         ViewComponent={LinearGradient}
         linearGradientProps={{
           start:{ x: 0.0, y: 0.0 },
@@ -19,3 +27,5 @@ export default class CustomHeader extends Component {
     )
   }
 }
+
+CustomHeader.propTypes = { leftIcon: PropTypes.string.isRequired, title: PropTypes.string }
