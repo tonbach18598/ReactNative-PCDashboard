@@ -1,13 +1,21 @@
 import React, {Component} from 'react'
-import {View, Text} from 'react-native'
+import {View} from 'react-native'
 import CustomHeader from '../components/custom_header'
 import Values from '../ultilities/values'
+import Configs from '../ultilities/configs'
+import WebView from 'react-native-webview'
 
 export default class HomeScreen extends Component{
     render(){
         return(
-            <View>
-                <CustomHeader leftIcon={'arrow-back'} title={Values.UPDATE_INFORMATION.toUpperCase()} onPress={()=>{this.props.navigation.goBack()}}/>
+            <View style={{flex:1, flexDirection:'column'}}>
+                <CustomHeader leftIcon={'arrow-back'} title={Values.HOME_PAGE.toUpperCase()} onPress={()=>{this.props.navigation.goBack()}}/>
+                <WebView source={{uri:Configs.homeUrl}}
+                javaScriptEnabled={true}
+                domStorageEnabled={true}
+                startInLoadingState={true}
+                scalesPageToFit={true}
+                />
             </View>
         )
     }

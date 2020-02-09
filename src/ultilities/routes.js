@@ -118,6 +118,7 @@ DrawerNavigator = createDrawerNavigator(
         initialRouteName:Routes.TabNavigator,
         headerMode:'none',
         contentComponent:CustomDrawer,
+        drawerWidth:304
     }
 )
 

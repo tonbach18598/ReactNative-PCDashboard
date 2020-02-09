@@ -180,6 +180,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				2D5222F85CCE30CB5C444C5B /* Pods */,
+				8D0406F6CA654C74BADC2691 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -195,6 +196,13 @@
 				2D02E4901E0B4A5D006451C7 /* reactnative_pcdashboard-tvOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		8D0406F6CA654C74BADC2691 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
