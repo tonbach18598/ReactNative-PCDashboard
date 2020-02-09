@@ -28,7 +28,6 @@ export default class SigninScreen extends Component {
             </View>
             <View>
                 <SigninButton text={Values.SIGN_IN.toUpperCase() } onPress={()=>{
-                    console.log('navigate to dashboard')
                     this.props.navigation.dispatch(NavigationActions.navigate({routeName:'DashboardNavigator'}))
                     }}/>
                 <View style={{width:'100%', height:Dimensions.get('window').height/10}}/>

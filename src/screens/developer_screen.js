@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text, Image, Dimensions } from 'react-native'
+import { View, Text, Image, Dimensions, ScrollView } from 'react-native'
 import CustomHeader from '../components/custom_header'
-import { ScrollView } from 'react-native-gesture-handler'
 import Colors from '../ultilities/colors'
 import Values from '../ultilities/values'
 

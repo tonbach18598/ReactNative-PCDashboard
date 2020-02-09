@@ -24,7 +24,7 @@ export default class SigninTextInput extends Component {
                 <TextInput
                     style={{flex:1, ...Platform.select({android:{marginTop:5, marginBottom:5},ios:{marginTop:20, marginBottom:20}})}}
                     placeholder={this.props.placeholder}
-                    selectionColor={Colors.black} />
+                    selectionColor={Colors.orange} />
             </View>
         );
     }
