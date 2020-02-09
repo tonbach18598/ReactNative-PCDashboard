@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Text, Dimensions, View } from "react-native";
-import { TouchableOpacity } from "react-native";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import { Text, Dimensions, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import PropTypes from 'prop-types';
 import Colors from '../ultilities/colors'
 
 export default class ForgetPasswordButton extends Component {
@@ -12,7 +12,7 @@ export default class ForgetPasswordButton extends Component {
 
     render() {
         return (
-            <View style={[{flexDirection:'row'}, this.props.style]}>
+            <View style={{flexDirection:'row', marginRight: 20}}>
                 <View style={{flex:1}}/>
             <TouchableOpacity onPress={this.props.onPress}>
                     <Text style={{ fontSize: 16, color: Colors.grey, fontWeight: 'bold', alignSelf:'flex-end', flexWrap:'wrap'}}>{this.props.text}</Text>
@@ -22,4 +22,4 @@ export default class ForgetPasswordButton extends Component {
     }
 }
 
-ForgetPasswordButton.propTypes = { text: PropTypes.string.isRequired, onPress:PropTypes.func.isRequired, style:PropTypes.style }
+ForgetPasswordButton.propTypes = { text: PropTypes.string.isRequired, onPress:PropTypes.func.isRequired }

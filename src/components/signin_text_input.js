@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { TextInput, Dimensions, View, Platform } from "react-native";
-import PropTypes from "prop-types";
-import Colors from "../ultilities/colors";
+import React, { Component } from 'react';
+import { TextInput, Dimensions, View, Platform, ViewPropTypes } from 'react-native';
+import PropTypes from 'prop-types';
+import Colors from '../ultilities/colors';
 import {Icon} from 'react-native-elements'
 
 export default class SigninTextInput extends Component {
@@ -24,9 +24,14 @@ export default class SigninTextInput extends Component {
                 <TextInput
                     style={{flex:1, ...Platform.select({android:{marginTop:5, marginBottom:5},ios:{marginTop:20, marginBottom:20}})}}
                     placeholder={this.props.placeholder}
-                    selectionColor={Colors.orange} />
+                    selectionColor={Colors.black} />
             </View>
         );
     }
 }
-SigninTextInput.propTypes = { icon:PropTypes.string.isRequired, placeholder: PropTypes.string.isRequired, style:PropTypes.style }
+
+SigninTextInput.propTypes = {
+    icon:PropTypes.string.isRequired,
+    placeholder: PropTypes.string.isRequired,
+    style:ViewPropTypes.style
+}

@@ -20,7 +20,7 @@ checkSignin=async()=>{
                 colors={['#ff5722', '#ff6e40', '#ff9800', '#ffab40', '#ffffff', '#40c4ff', '#03a9f4', '#2196f3', '#448aff']}>
                 <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
                     <Image style={{ width: Dimensions.get('window').width * 0.6, height: Dimensions.get('window').width * 0.4 }} source={require('../../assets/logo.png')} />
-                    <View style={{ width: Dimensions.get('window').width, height: Dimensions.get('window').height * 0.06 }} />
+                    <View style={{ height: Dimensions.get('window').height /10 }} />
                     <ActivityIndicator size='large' color={Colors.white} />
                 </View>
             </LinearGradient>
