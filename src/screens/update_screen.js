@@ -14,7 +14,7 @@ export default class UpdateScreen extends Component {
             <View style={{ flex: 1, flexDirection: 'column' }}>
                 <CustomHeader leftIcon={'arrow-back'} title={Values.UPDATE_INFORMATION.toUpperCase()} onPress={() => { this.props.navigation.goBack() }} />
                 <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: 'center', justifyContent: 'space-evenly' }}>
-                    <View style={{flexDirection:'column', alignItems:'center'}}>
+                    <View style={{flexDirection:'column', alignItems:'center', height:Dimensions.get('window').height/4, justifyContent:'center'}}>
                         <Avatar
                             rounded
                             size='xlarge'
@@ -34,8 +34,6 @@ export default class UpdateScreen extends Component {
                         <SigninButton text={Values.CONFIRM.toUpperCase()} onPress={() => {
                         }} />
                     </View>
-                    <View style={{height:Dimensions.get('window').height/10}}/>
-
                 </ScrollView>
             </View>
         )

@@ -12,8 +12,8 @@ export default class UpdateInformationTextInput extends Component {
     render() {
         return (
             <View style={[{
-                backgroundColor:Colors.white, borderRadius:20,  borderWidth:2, borderColor:this.props.primaryColor,
-                width: Dimensions.get('window').width/1.2, flexDirection:'row', justifyContent:'center', alignItems:'center'},
+                backgroundColor:Colors.white, borderRadius:20, borderWidth:2, borderColor:this.props.primaryColor,
+                 width: Dimensions.get('window').width/1.2, flexDirection:'row', justifyContent:'center', alignItems:'center'},
                 this.props.style]}>
                 <View style={{marginLeft:20, marginRight:20}}>
                     <Icon
@@ -21,11 +21,10 @@ export default class UpdateInformationTextInput extends Component {
                         color={this.props.primaryColor}/>
                 </View>
                 <TextInput
-                    style={{flex:1, ...Platform.select({android:{},ios:{marginTop:15, marginBottom:15}})}}
+                    style={{flex:1, ...Platform.select({ios:{marginTop:15, marginBottom:15}})}}
                     placeholder={this.props.placeholder}
                     selectionColor={Colors.orange}
-                    editable={this.props.editable}
-                    color={Colors.orange} />
+                    editable={this.props.editable} />
             </View>
         );
     }
