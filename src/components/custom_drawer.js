@@ -9,6 +9,7 @@ import Values from '../ultilities/values';
 import Colors from '../ultilities/colors';
 import Configs from '../ultilities/configs';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
+import QRCode from 'react-native-qrcode-svg';
 
 
 export default class CustomDrawer extends Component {
@@ -27,7 +28,7 @@ export default class CustomDrawer extends Component {
           start={{ x: 0.0, y: 1.0 }}
           end={{ x: 1.0, y: 0.0 }}
           colors={['#448aff', '#2196f3', '#03a9f4', '#40c4ff']}>
-          <View style={{ justifyContent: 'flex-end', flex: 1, flexDirection: 'column', paddingLeft:16 }}>
+          <View style={{ justifyContent: 'flex-end', flex: 1, flexDirection: 'column', paddingLeft:20 }}>
             <Avatar
               rounded
               size='large'
@@ -74,6 +75,12 @@ export default class CustomDrawer extends Component {
           title={Configs.currentVersion}
           titleStyle={{ fontSize: 14, fontStyle: 'italic', color: Colors.grey }}
         />
+        <View style={{paddingLeft:20, paddingTop: 10}}>
+          <QRCode value='1613013'
+          size={100}
+          logo={require('../../assets/logo.png')}
+          logoSize={30}/>
+        </View>
       </View>
     );
   }
