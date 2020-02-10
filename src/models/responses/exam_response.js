@@ -2,19 +2,19 @@
 //
 //   const Convert = require("./file");
 //
-//   const changePasswordRequest = Convert.toChangePasswordRequest(json);
+//   const examResponse = Convert.toExamResponse(json);
 //
 // These functions will throw an error if the JSON doesn't
 // match the expected interface, even if the JSON is valid.
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
-function toChangePasswordRequest(json) {
-    return cast(JSON.parse(json), r("ChangePasswordRequest"));
+function toExamResponse(json) {
+    return cast(JSON.parse(json), a(r("ExamResponse")));
 }
 
-function changePasswordRequestToJson(value) {
-    return JSON.stringify(uncast(value, r("ChangePasswordRequest")), null, 2);
+function examResponseToJson(value) {
+    return JSON.stringify(uncast(value, a(r("ExamResponse"))), null, 2);
 }
 
 function invalidValue(typ, val) {
@@ -147,14 +147,16 @@ function r(name) {
 }
 
 const typeMap = {
-    "ChangePasswordRequest": o([
+    "ExamResponse": o([
+        { json: "name", js: "name", typ: "" },
+        { json: "time", js: "time", typ: "" },
+        { json: "place", js: "place", typ: "" },
+        { json: "score", js: "score", typ: 0 },
         { json: "userId", js: "userId", typ: "" },
-        { json: "oldPassword", js: "oldPassword", typ: "" },
-        { json: "newPassword", js: "newPassword", typ: "" },
     ], false),
 };
 
 module.exports = {
-    "changePasswordRequestToJson": changePasswordRequestToJson,
-    "toChangePasswordRequest": toChangePasswordRequest,
+    "examResponseToJson": examResponseToJson,
+    "toExamResponse": toExamResponse,
 };
