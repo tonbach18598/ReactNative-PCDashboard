@@ -6,7 +6,7 @@ export default class TeachScreen extends Component{
     render(){
         return(
             <View>
-                <CustomHeader leftIcon='menu' onPress={()=>{this.props.navigation.openDrawer()}}/>
+                <CustomHeader left='menu' onPress={()=>{this.props.navigation.openDrawer()}}/>
             </View>
         )
     }

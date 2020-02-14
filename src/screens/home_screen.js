@@ -9,7 +9,7 @@ export default class HomeScreen extends Component{
     render(){
         return(
             <View style={{flex:1, flexDirection:'column'}}>
-                <CustomHeader leftIcon={'arrow-back'} title={Values.HOME_PAGE.toUpperCase()} onPress={()=>{this.props.navigation.goBack()}}/>
+                <CustomHeader left={'arrow-back'} title={Values.HOME_PAGE.toUpperCase()} onPress={()=>{this.props.navigation.goBack()}}/>
                 <WebView source={{uri:Configs.homeUrl}}
                 javaScriptEnabled={true}
                 domStorageEnabled={true}
