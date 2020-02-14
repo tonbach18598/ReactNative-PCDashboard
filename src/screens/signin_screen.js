@@ -23,11 +23,11 @@ export default class SigninScreen extends Component {
                     placeholder={Values.PASSWORD}
                     style={{marginTop:10, marginBottom:20}}/>
                 <ForgetPasswordButton
-                    text={Values.FORGET_PASSWORD}
+                    title={Values.FORGET_PASSWORD}
                     onPress={()=>this.props.navigation.push(Routes.forgetRoute)}/>
             </View>
             <View>
-                <SigninButton text={Values.SIGN_IN.toUpperCase() } onPress={()=>{
+                <SigninButton title={Values.SIGN_IN.toUpperCase() } onPress={()=>{
                     this.props.navigation.dispatch(NavigationActions.navigate({routeName:'DashboardNavigator'}))
                     }}/>
                 <View style={{width:'100%', height:Dimensions.get('window').height/10}}/>
