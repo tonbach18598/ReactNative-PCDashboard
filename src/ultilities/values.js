@@ -30,7 +30,8 @@ export default class Values {
   static get ENTER_CONTENT() { return 'Nhập nội dung' }
   static get SHARE_YOUR_THINKING() { return 'Chia sẻ cảm nghĩ của bạn' }
   static get CONFIRM() { return 'Xác nhận' }
-  static get STUDENT_LIST() { return 'Danh sách sinh viên' }
+  static get THIRD_YEAR_LIST() { return 'Danh sách năm 3' }
+  static get FOURTH_YEAR_LIST() { return 'Danh sách năm 4' }
   static get TEACHER_LIST() { return 'Danh sách giảng viên' }
   static get POST() { return 'Đăng' }
   static get YOUR_THINKING() { return 'Cảm nghĩ của bạn' }
@@ -39,4 +40,6 @@ export default class Values {
   static get EDIT_COMMENT() { return 'Sửa bình luận' }
   static get POST_POST() { return 'Đăng bài' }
   static get EDIT_POST() { return 'Sửa bài' }
+  static get THIRD_YEAR_CLASS() { return 'Lớp năm 3' }
+  static get FOURTH_YEAR_CLASS() { return 'Lớp năm 4' }
 }

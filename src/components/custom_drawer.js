@@ -16,8 +16,8 @@ export default class CustomDrawer extends Component {
   navigateToScreen = (routeName) => () => {
     const navigateAction = NavigationActions.navigate({
       routeName: routeName
-    });
-    this.props.navigation.dispatch(navigateAction);
+    })
+    this.props.navigation.dispatch(navigateAction)
   }
 
   render() {

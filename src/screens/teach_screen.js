@@ -5,7 +5,7 @@ import CustomHeader from '../components/custom_header'
 export default class TeachScreen extends Component{
     render(){
         return(
-            <View>
+            <View style={{flex:1}}>
                 <CustomHeader left='menu' onPress={()=>{this.props.navigation.openDrawer()}}/>
             </View>
         )
