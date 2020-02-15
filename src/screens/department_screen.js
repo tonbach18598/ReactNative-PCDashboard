@@ -51,7 +51,7 @@ export default class DepartmentScreen extends Component {
     render() {
         return (
             <View style={{flex:1}}>
-                <CustomHeader left='menu' onPress={() => { this.props.navigation.openDrawer() }} />
+                <CustomHeader left='menu' onPressLeft={() => { this.props.navigation.openDrawer() }} />
                 <FlatList 
                 style={{flex:1}}
                 keyExtractor={item=>item.id}

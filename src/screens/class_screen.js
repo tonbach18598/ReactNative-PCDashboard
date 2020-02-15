@@ -4,6 +4,7 @@ import CustomHeader from '../components/custom_header'
 import Values from '../ultilities/values'
 import Colors from '../ultilities/colors'
 import { Card, Avatar, Button, Icon, Header } from 'react-native-elements'
+import Routes from '../ultilities/routes'
 
 export default class ClassScreen extends Component {
     constructor(props) {
@@ -56,8 +57,8 @@ export default class ClassScreen extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <CustomHeader left={'arrow-back'} title={Values.THIRD_YEAR_CLASS.toUpperCase()} onPress={() => { this.props.navigation.goBack() }} />
-                <TouchableOpacity>
+                <CustomHeader title={Values.THIRD_YEAR_CLASS.toUpperCase()} left={'arrow-back'}  onPressLeft={() => { this.props.navigation.goBack() }} />
+                <TouchableOpacity onPress={()=>{this.props.navigation.navigate(Routes.editRoute)}}>
                     <View style={{ height: 56, backgroundColor: Colors.grey200, flexDirection: 'row', alignItems: 'center', paddingLeft: 20, paddingRight: 20, paddingTop: 10, paddingBottom: 10 }}>
                         <Avatar
                             rounded
@@ -93,7 +94,7 @@ export default class ClassScreen extends Component {
                                 <Text style={{ fontSize: 14, marginTop: 10, marginBottom: 5 }}>{item.content}</Text>
                                 <Image style={{ width: '100%', height: 200, marginTop: 5, borderRadius: 10 }}
                                     source={{ uri: item.image }} />
-                                <TouchableOpacity style={{ marginTop: 10 }}>
+                                <TouchableOpacity style={{ marginTop: 10 }} onPress={()=>{this.props.navigation.navigate(Routes.commentRoute)}}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                                         <Icon name='comment' color={Colors.lightBlue} />
                                         <Text style={{ fontSize: 16, fontWeight: 'bold', marginLeft: 5 }}>{Values.COMMENT}</Text>

@@ -42,7 +42,7 @@ export default class UserScreen extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <CustomHeader left={'arrow-back'} title={Values.THIRD_YEAR_LIST.toUpperCase()} onPress={() => { this.props.navigation.goBack() }} />
+                <CustomHeader title={Values.THIRD_YEAR_LIST.toUpperCase()} left={'arrow-back'} onPressLeft={() => { this.props.navigation.goBack() }} />
                 <FlatList
                     style={{ flex: 1, paddingBottom:50 }}
                     data={this.state.users}

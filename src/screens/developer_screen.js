@@ -8,7 +8,7 @@ export default class DeveloperScreen extends Component {
     render() {
         return (
             <View style={{ flex: 1, flexDirection: 'column' }}>
-                <CustomHeader left={'arrow-back'} title={Values.DEVELOPER.toUpperCase()} onPress={() => { this.props.navigation.goBack() }} />
+                <CustomHeader title={Values.DEVELOPER.toUpperCase()} left={'arrow-back'} onPressLeft={() => { this.props.navigation.goBack() }} />
                 <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: 'center', justifyContent: 'center', marginLeft:10, marginRight:10 }}>
                     <Image style={{ width: Dimensions.get('window').height / 3.2, height: Dimensions.get('window').height / 4.8 }} source={require('../../assets/logo.png')} />
                     <View style={{ height: Dimensions.get('window').height / 30 }} />

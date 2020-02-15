@@ -12,7 +12,7 @@ export default class ChangeScreen extends Component {
     render() {
         return (
             <View style={{ flex: 1, flexDirection: 'column' }}>
-                <CustomHeader left={'arrow-back'} title={Values.CHANGE_PASSWORD.toUpperCase()} onPress={() => { this.props.navigation.goBack() }} />
+                <CustomHeader title={Values.CHANGE_PASSWORD.toUpperCase()} left={'arrow-back'}  onPressLeft={() => { this.props.navigation.goBack() }} />
                 <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: 'center', justifyContent: 'space-evenly' }}>
                 <Image style={{ width: Dimensions.get('window').width * 0.6, height: Dimensions.get('window').width * 0.4 }} source={require('../../assets/logo.png')} />
 
