@@ -27,7 +27,7 @@ export default class ContactScreen extends Component{
                     <View style={{height:5}}/>
                     <View style={{flex:1}}>
                         <TouchableOpacity
-                        onPress={()=>{  this.props.navigation.navigate(Routes.userRoute, Value.FOURTH_YEAR_LIST)}}
+                        onPress={()=>{  this.props.navigation.navigate(Routes.userRoute, Values.FOURTH_YEAR_LIST)}}
                         style={{flex:1, borderTopRightRadius:Dimensions.get('window').height/8.8, borderBottomLeftRadius:Dimensions.get('window').height/8.8}}>
                             <LinearGradient
                                 style={{ flex:1, borderTopRightRadius: Dimensions.get('window').height/8,borderBottomLeftRadius: Dimensions.get('window').height/8, alignItems: 'center', paddingTop: 10, paddingBottom: 10, height: 50, justifyContent: 'center' }}

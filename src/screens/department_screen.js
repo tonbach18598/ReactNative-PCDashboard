@@ -54,8 +54,9 @@ export default class DepartmentScreen extends Component {
                 <CustomHeader left='menu' onPress={() => { this.props.navigation.openDrawer() }} />
                 <FlatList 
                 style={{flex:1}}
+                keyExtractor={item=>item.id}
+                ListFooterComponent={<View style={{height:10}}/>}
                 data={this.state.posts}
-                    keyExtractor={item=>item.id}
                     renderItem={({ item }) => (
                         <Card containerStyle={{elevation:5,borderRadius:10}}>
                             <View style={{ flexDirection: 'column' }}>
@@ -63,8 +64,7 @@ export default class DepartmentScreen extends Component {
                                 <Text style={{color:Colors.grey,fontSize:12,marginTop:5}}>{item.time}</Text>
                                 <Text style={{color:Colors.black,fontSize:14,marginTop:10,marginBottom:10}}>{item.content}</Text>
                                 <Image style={{ width: '100%', height: 200,marginTop:5, borderRadius:10 }}
-                                    source={{ uri: item.image }}
-                                />
+                                    source={{ uri: item.image }}/>
                             </View>
                         </Card>
                     )}

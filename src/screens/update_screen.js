@@ -27,11 +27,11 @@ export default class UpdateScreen extends Component {
                         <Text style={{ fontSize: 20, color: Colors.deepOrangeAccent, fontWeight: 'bold' }}>1613013</Text>
                     </View>
                     <View>
-                        <UpdateInformationTextInput placeholder={Values.CLASS} icon='people' editable={false} primaryColor={Colors.lightBlue} />
-                        <UpdateInformationTextInput placeholder={Values.EMAIL} icon='mail' editable={true} primaryColor={Colors.orange} style={{marginTop:10, marginBottom:10}} />
-                        <UpdateInformationTextInput placeholder={Values.PHONE} icon='smartphone' editable={true} primaryColor={Colors.orange} />
+                        <UpdateInformationTextInput placeholder={Values.CLASS} icon='people' editable={false} color={Colors.lightBlue} />
+                        <UpdateInformationTextInput placeholder={Values.EMAIL} icon='mail' editable={true} color={Colors.orange} style={{marginTop:10, marginBottom:10}} />
+                        <UpdateInformationTextInput placeholder={Values.PHONE} icon='smartphone' editable={true} color={Colors.orange} />
                         <View style={{height:Dimensions.get('window').height/10}}/>
-                        <SigninButton text={Values.CONFIRM.toUpperCase()} onPress={() => {
+                        <SigninButton title={Values.CONFIRM.toUpperCase()} onPress={() => {
                         }} />
                     </View>
                 </ScrollView>

@@ -17,11 +17,11 @@ export default class ChangeScreen extends Component {
                 <Image style={{ width: Dimensions.get('window').width * 0.6, height: Dimensions.get('window').width * 0.4 }} source={require('../../assets/logo.png')} />
 
                     <View>
-                        <UpdateInformationTextInput placeholder={Values.OLD_PASSWORD} icon='vpn-key' editable={false} primaryColor={Colors.lightBlue} />
-                        <UpdateInformationTextInput placeholder={Values.NEW_PASSWORD} icon='lock-open' editable={true} primaryColor={Colors.orange} style={{marginTop:10, marginBottom:10}} />
-                        <UpdateInformationTextInput placeholder={Values.RETYPE_PASSWORD} icon='lock-outline' editable={true} primaryColor={Colors.orange} />
+                        <UpdateInformationTextInput placeholder={Values.OLD_PASSWORD} icon='vpn-key' editable={false} color={Colors.lightBlue} />
+                        <UpdateInformationTextInput placeholder={Values.NEW_PASSWORD} icon='lock-open' editable={true} color={Colors.orange} style={{marginTop:10, marginBottom:10}} />
+                        <UpdateInformationTextInput placeholder={Values.RETYPE_PASSWORD} icon='lock-outline' editable={true} color={Colors.orange} />
                         <View style={{height:Dimensions.get('window').height/10}}/>
-                        <SigninButton text={Values.CONFIRM.toUpperCase()} onPress={() => {
+                        <SigninButton title={Values.CONFIRM.toUpperCase()} onPress={() => {
                         }} />
                     </View>
                 </ScrollView>
