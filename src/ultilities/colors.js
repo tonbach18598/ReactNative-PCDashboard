@@ -4,6 +4,7 @@ export default class Colors {
     static get black54() { return '0x8a000000' }
     static get grey() { return '#9e9e9e' }
     static get grey200() { return '#eeeeee' }
+    static get grey300() { return '#e0e0e0'}
     static get white() { return '#ffffff' }
     static get deepOrange() { return '#ff5722' }
     static get deepOrangeAccent() { return '#ff6e40' }

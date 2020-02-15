@@ -13,6 +13,7 @@ const Logo = () => (
                 <Image style={{ width: Dimensions.get('window').width / 2, height: Dimensions.get('window').width / 3 }} source={require('../../assets/logo.png')} />
             </View>
         </LinearGradient>
-    </View>)
+    </View>
+    )
 
 export default Logo

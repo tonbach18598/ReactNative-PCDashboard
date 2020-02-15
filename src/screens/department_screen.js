@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, Image, FlatList } from 'react-native'
-import Values from '../ultilities/values'
-import { Icon, Button, Card } from 'react-native-elements'
+import { Card } from 'react-native-elements'
 import CustomHeader from '../components/custom_header'
 import Colors from '../ultilities/colors'
 
@@ -55,7 +54,7 @@ export default class DepartmentScreen extends Component {
                 <FlatList 
                 style={{flex:1}}
                 keyExtractor={item=>item.id}
-                ListFooterComponent={<View style={{height:10}}/>}
+                ListFooterComponent={<View style={{height:5}}/>}
                 data={this.state.posts}
                     renderItem={({ item }) => (
                         <Card containerStyle={{elevation:5,borderRadius:10}}>
@@ -63,7 +62,8 @@ export default class DepartmentScreen extends Component {
                                 <Text style={{color:Colors.blue,fontSize:18,fontWeight:'bold'}}>{item.title}</Text>
                                 <Text style={{color:Colors.grey,fontSize:12,marginTop:5}}>{item.time}</Text>
                                 <Text style={{color:Colors.black,fontSize:14,marginTop:10,marginBottom:10}}>{item.content}</Text>
-                                <Image style={{ width: '100%', height: 200,marginTop:5, borderRadius:10 }}
+                                <Image
+                                    style={{ width: '100%', height: 200,marginTop:5, borderRadius:10 }}
                                     source={{ uri: item.image }}/>
                             </View>
                         </Card>
