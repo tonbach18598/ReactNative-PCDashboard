@@ -42,4 +42,5 @@ export default class Values {
   static get EDIT_POST() { return 'Sửa bài' }
   static get THIRD_YEAR_CLASS() { return 'Lớp năm 3' }
   static get FOURTH_YEAR_CLASS() { return 'Lớp năm 4' }
+  static get PHYSICS_COMPUTER_SCIENCE() { return 'Vật lý Tin học'}
 }

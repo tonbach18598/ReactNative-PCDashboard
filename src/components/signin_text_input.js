@@ -5,9 +5,19 @@ import { Icon } from 'react-native-elements'
 
 const SigninTextInput = ({ icon, placeholder, style }) => (
     <View style={[{
-        backgroundColor: Colors.white, borderRadius: 30, shadowColor: Colors.shadow,
-        shadowOffset: { width: 0, height: 5, },
-        shadowOpacity: 0.34, shadowRadius: 6.27, elevation: 10, width: Dimensions.get('window').width / 1.2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'
+        backgroundColor: Colors.white, borderRadius: 30,
+        ...Platform.select({
+            ios: {
+                shadowColor: Colors.grey,
+                shadowOffset: { height: 1, width: 1 },
+                shadowOpacity: 0.8,
+                shadowRadius: 10
+            },
+            android: {
+                elevation: 10
+            }
+        }),
+        width: Dimensions.get('window').width / 1.2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'
     },
         style]}>
         <View style={{ marginLeft: 20, marginRight: 20 }}>

@@ -3,6 +3,7 @@ import { View, Text, FlatList } from 'react-native'
 import CustomHeader from '../components/custom_header'
 import { Card, Icon } from 'react-native-elements'
 import Colors from '../ultilities/colors'
+import Values from '../ultilities/values'
 
 export default class TeachScreen extends Component {
     state = {
@@ -66,20 +67,40 @@ export default class TeachScreen extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <CustomHeader left='menu' onPressLeft={() => { this.props.navigation.openDrawer() }} />
+                <CustomHeader title={Values.PHYSICS_COMPUTER_SCIENCE.toUpperCase()} left='menu' onPressLeft={() => { this.props.navigation.openDrawer() }} />
                 <FlatList
                     style={{ flex: 1 }}
                     ListFooterComponent={<View style={{ height: 5 }} />}
                     data={this.state.schedules}
                     renderItem={({ item }) => (
-                        <Card containerStyle={{ elevation: 5, borderRadius: 10 }}>
+                        <Card containerStyle={{ borderRadius: 10,...Platform.select({
+                            ios: {
+                                shadowColor: Colors.grey,
+                                shadowOffset: { height: 1, width: 1 },
+                                shadowOpacity: 0.8,
+                                shadowRadius: 5
+                            },
+                            android: {
+                                elevation: 5
+                            }
+                        }) }}>
                             <View style={{ flexDirection: 'column',alignItems:'center' }}>
                                 <Text style={{ color: Colors.blue, fontSize: 18, fontWeight: 'bold' }}>{item.day.toUpperCase()}</Text>
                                 <FlatList
                                     style={{flex:1, width:'100%'}}
                                     data={item.subjects}
                                     renderItem={({ item }) => (
-                                        <Card containerStyle={{ elevation: 5, borderRadius: 10 }}>
+                                        <Card containerStyle={{ borderRadius: 10,...Platform.select({
+                                            ios: {
+                                                shadowColor: Colors.grey,
+                                                shadowOffset: { height: 1, width: 1 },
+                                                shadowOpacity: 0.8,
+                                                shadowRadius: 5
+                                            },
+                                            android: {
+                                                elevation: 5
+                                            }
+                                        }) }}>
                                             <View style={{ flexDirection: 'column' }}>
                                                 <View style={{flexDirection:'row',alignItems:'center', marginBottom:10}}>
                                                     <Icon name='book' color={Colors.lightBlue}/>

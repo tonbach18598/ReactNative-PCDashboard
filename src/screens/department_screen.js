@@ -3,6 +3,7 @@ import { View, Text, Image, FlatList } from 'react-native'
 import { Card } from 'react-native-elements'
 import CustomHeader from '../components/custom_header'
 import Colors from '../ultilities/colors'
+import Values from '../ultilities/values'
 
 export default class DepartmentScreen extends Component {
     constructor(props) {
@@ -50,14 +51,25 @@ export default class DepartmentScreen extends Component {
     render() {
         return (
             <View style={{flex:1}}>
-                <CustomHeader left='menu' onPressLeft={() => { this.props.navigation.openDrawer() }} />
+                <CustomHeader title={Values.PHYSICS_COMPUTER_SCIENCE.toUpperCase()} left='menu' onPressLeft={() => { this.props.navigation.openDrawer() }} />
                 <FlatList 
                 style={{flex:1}}
                 keyExtractor={item=>item.id}
                 ListFooterComponent={<View style={{height:5}}/>}
                 data={this.state.posts}
                     renderItem={({ item }) => (
-                        <Card containerStyle={{elevation:5,borderRadius:10}}>
+                        <Card containerStyle={{borderRadius:10,
+                            ...Platform.select({
+                            ios: {
+                                shadowColor: Colors.grey,
+                                shadowOffset: { height: 1, width: 1 },
+                                shadowOpacity: 0.8,
+                                shadowRadius: 5
+                            },
+                            android: {
+                                elevation: 5
+                            }
+                        })}}>
                             <View style={{ flexDirection: 'column' }}>
                                 <Text style={{color:Colors.blue,fontSize:18,fontWeight:'bold'}}>{item.title}</Text>
                                 <Text style={{color:Colors.grey,fontSize:12,marginTop:5}}>{item.time}</Text>

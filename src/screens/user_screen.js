@@ -40,7 +40,18 @@ export default class UserScreen extends Component {
                     ListFooterComponent={<View style={{ height: 5 }} />}
                     renderItem={({ item }) => (
                         <TouchableOpacity>
-                            <Card containerStyle={{ elevation: 5, borderRadius: 10 }}>
+                            <Card containerStyle={{ borderRadius: 10,
+                            ...Platform.select({
+                            ios: {
+                                shadowColor: Colors.grey,
+                                shadowOffset: { height: 1, width: 1 },
+                                shadowOpacity: 0.8,
+                                shadowRadius: 5
+                            },
+                            android: {
+                                elevation: 5
+                            }
+                        }) }}>
                                 <View style={{ flexDirection: 'row' }}>
                                     <Avatar
                                         rounded

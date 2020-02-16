@@ -8,9 +8,18 @@ import Colors from '../ultilities/colors'
 const SigninButton = ({ title, onPress }) => (
     <TouchableOpacity
         style={{
-            width: Dimensions.get('window').width / 1.2, height: 50, borderRadius: 30, shadowColor: Colors.shadow,
-            shadowOffset: { width: 0, height: 2, },
-            shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5,
+            width: Dimensions.get('window').width / 1.2, height: 50, borderRadius: 30, 
+            ...Platform.select({
+                ios: {
+                    shadowColor: Colors.grey,
+                    shadowOffset: { height: 1, width: 1 },
+                    shadowOpacity: 0.8,
+                    shadowRadius: 10
+                },
+                android: {
+                    elevation: 10
+                }
+            })
         }}
         onPress={onPress}>
         <LinearGradient

@@ -9,7 +9,7 @@ export default class ContactScreen extends Component{
     render(){
         return(
             <View style={{flex:1}}>
-                <CustomHeader left='menu' onPressLeft={()=>{this.props.navigation.openDrawer()}}/>
+                <CustomHeader title={Values.PHYSICS_COMPUTER_SCIENCE.toUpperCase()} left='menu' onPressLeft={()=>{this.props.navigation.openDrawer()}}/>
                 <View style={{flex:1,flexDirection:'column', margin:5}}>
                 <View style={{flex:1}}>
                         <TouchableOpacity

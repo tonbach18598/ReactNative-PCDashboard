@@ -20,5 +20,4 @@ export default class Colors {
     static get greenAccent() { return '#69f0ae' }
     static get red() { return 'Ff44336' }
     static get amber() { return '#ffc107' }
-    static get shadow() { return '#000' }
 }
