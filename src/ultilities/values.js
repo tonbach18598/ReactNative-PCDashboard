@@ -19,7 +19,6 @@ export default class Values {
   static get DEVELOPER() { return 'Nhà phát triển' }
   static get EDIT() { return 'Sửa' }
   static get DELETE() { return 'Xoá' }
-  static get SCHEDULE() { return 'Thời khoá biểu' }
   static get CANCEL() { return 'Huỷ' }
   static get OPTION() { return 'Tuỳ chọn' }
   static get EMAIL() { return 'Email' }
