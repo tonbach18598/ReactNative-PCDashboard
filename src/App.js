@@ -8,9 +8,7 @@ import store from './reduxs/store/store'
 export default class App extends Component {
   render() {
     return (
-      <Provider store={store}>
           <AppContainer/>
-      </Provider>
     )
   }
 }

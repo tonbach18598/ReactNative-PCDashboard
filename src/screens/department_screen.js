@@ -4,49 +4,30 @@ import { Card } from 'react-native-elements'
 import CustomHeader from '../components/custom_header'
 import Colors from '../ultilities/colors'
 import Values from '../ultilities/values'
+import Axios from 'axios'
+import Configs from '../ultilities/configs'
+import Optional from 'react-native-optional'
 
 export default class DepartmentScreen extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            posts: [
-                {
-                    id:1,
-                    time:'10:30 17/02/2020',
-                    title: 'Chào mừng lễ tình nhân',
-                    content: 'Bộ môn gửi tặng 100 hộp chocolate cho các sinh viên',
-                    image: 'https://scontent-xsp1-1.xx.fbcdn.net/v/t1.0-9/82250698_1354624784710283_3323354228021264384_o.jpg?_nc_cat=104&_nc_ohc=7ePO0Vo6uV8AX9mNIAB&_nc_ht=scontent-xsp1-1.xx&oh=fb5c1aaa14644eddff945466da8f9183&oe=5EB7A828',
-                },
-                {
-                    id:2,
-                    time:'10:30 17/02/2020',
-                    title: 'Chào mừng lễ tình nhân',
-                    content: 'Bộ môn gửi tặng 100 hộp chocolate cho các sinh viên',
-                    image: 'https://scontent-xsp1-1.xx.fbcdn.net/v/t1.0-9/82250698_1354624784710283_3323354228021264384_o.jpg?_nc_cat=104&_nc_ohc=7ePO0Vo6uV8AX9mNIAB&_nc_ht=scontent-xsp1-1.xx&oh=fb5c1aaa14644eddff945466da8f9183&oe=5EB7A828',
-                },
-                {
-                    id:3,
-                    time:'10:30 17/02/2020',
-                    title: 'Chào mừng lễ tình nhân',
-                    content: 'Bộ môn gửi tặng 100 hộp chocolate cho các sinh viên',
-                    image: 'https://scontent-xsp1-1.xx.fbcdn.net/v/t1.0-9/82250698_1354624784710283_3323354228021264384_o.jpg?_nc_cat=104&_nc_ohc=7ePO0Vo6uV8AX9mNIAB&_nc_ht=scontent-xsp1-1.xx&oh=fb5c1aaa14644eddff945466da8f9183&oe=5EB7A828',
-                },
-                {
-                    id:4,
-                    time:'10:30 17/02/2020',
-                    title: 'Chào mừng lễ tình nhân',
-                    content: 'Bộ môn gửi tặng 100 hộp chocolate cho các sinh viên',
-                    image: 'https://scontent-xsp1-1.xx.fbcdn.net/v/t1.0-9/82250698_1354624784710283_3323354228021264384_o.jpg?_nc_cat=104&_nc_ohc=7ePO0Vo6uV8AX9mNIAB&_nc_ht=scontent-xsp1-1.xx&oh=fb5c1aaa14644eddff945466da8f9183&oe=5EB7A828',
-                },
-                {
-                    id:5,
-                    time:'10:30 17/02/2020',
-                    title: 'Chào mừng lễ tình nhân',
-                    content: 'Bộ môn gửi tặng 100 hộp chocolate cho các sinh viên',
-                    image: 'https://scontent-xsp1-1.xx.fbcdn.net/v/t1.0-9/82250698_1354624784710283_3323354228021264384_o.jpg?_nc_cat=104&_nc_ohc=7ePO0Vo6uV8AX9mNIAB&_nc_ht=scontent-xsp1-1.xx&oh=fb5c1aaa14644eddff945466da8f9183&oe=5EB7A828',
-                }
-            ]
-        }
+    state={
+        posts:[]
+    }
+
+    componentDidMount(){
+        Axios({
+            method:'GET',
+            url:Configs.baseUrl+Configs.departmentPath,
+            params:{'number':10},
+            headers:{ 'Content-Type': 'application/json',
+            'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNTc3MDkxNjAxLCJleHAiOjE2MDg2Mjc2MDF9.wNCingf553U0ZAo4N-_ZIKNPu9fzNtWOc3nQBhLeV-of5GUawEehZ0TUyCzrWxJMiN42qTVOObXSR5E_JE3_IA'}
+        }).then(response=>{
+            console.log(response.data)
+            this.setState({
+                posts:response.data
+            })
+        }).catch(error=>{
+            console.log(error)
+        })
     }
     render() {
         return (
@@ -74,9 +55,11 @@ export default class DepartmentScreen extends Component {
                                 <Text style={{color:Colors.blue,fontSize:18,fontWeight:'bold'}}>{item.title}</Text>
                                 <Text style={{color:Colors.grey,fontSize:12,marginTop:5}}>{item.time}</Text>
                                 <Text style={{color:Colors.black,fontSize:14,marginTop:10,marginBottom:10}}>{item.content}</Text>
+                                <Optional test={item.image!==null}>
                                 <Image
                                     style={{ width: '100%', height: 200,marginTop:5, borderRadius:10 }}
                                     source={{ uri: item.image }}/>
+                                </Optional>
                             </View>
                         </Card>
                     )}
@@ -85,4 +68,3 @@ export default class DepartmentScreen extends Component {
         );
     }
 }
-
