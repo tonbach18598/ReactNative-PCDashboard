@@ -4,31 +4,17 @@ import { Card } from 'react-native-elements'
 import CustomHeader from '../components/custom_header'
 import Colors from '../ultilities/colors'
 import Values from '../ultilities/values'
-import Axios from 'axios'
-import Configs from '../ultilities/configs'
 import Optional from 'react-native-optional'
+import { saveDepartmentPosts } from '../reduxs/actions/department_action'
+import { connect } from 'react-redux'
 
-export default class DepartmentScreen extends Component {
-    state={
-        posts:[]
-    }
+class DepartmentScreen extends Component {
+    posts=[]
 
     componentDidMount(){
-        Axios({
-            method:'GET',
-            url:Configs.baseUrl+Configs.departmentPath,
-            params:{'number':10},
-            headers:{ 'Content-Type': 'application/json',
-            'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNTc3MDkxNjAxLCJleHAiOjE2MDg2Mjc2MDF9.wNCingf553U0ZAo4N-_ZIKNPu9fzNtWOc3nQBhLeV-of5GUawEehZ0TUyCzrWxJMiN42qTVOObXSR5E_JE3_IA'}
-        }).then(response=>{
-            console.log(response.data)
-            this.setState({
-                posts:response.data
-            })
-        }).catch(error=>{
-            console.log(error)
-        })
+        this.props.fetchData(10)
     }
+
     render() {
         return (
             <View style={{flex:1}}>
@@ -37,7 +23,7 @@ export default class DepartmentScreen extends Component {
                 style={{flex:1}}
                 keyExtractor={item=>item.id}
                 ListFooterComponent={<View style={{height:5}}/>}
-                data={this.state.posts}
+                data={this.props.departmentPosts}
                     renderItem={({ item }) => (
                         <Card containerStyle={{borderRadius:10,
                             ...Platform.select({
@@ -68,3 +54,18 @@ export default class DepartmentScreen extends Component {
         );
     }
 }
+
+const mapStateToProps=(state)=>{
+    return {
+    }
+}
+
+const mapDispatchToProps=(dispatch)=>{
+    return {
+        fetchData:(number)=>{
+            dispatch(saveDepartmentPosts(number))
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(DepartmentScreen)

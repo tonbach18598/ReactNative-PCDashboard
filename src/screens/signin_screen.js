@@ -7,6 +7,7 @@ import SigninButton from '../components/signin_button'
 import ForgetPasswordButton from '../components/forget_password_button'
 import Routes from '../ultilities/routes';
 import { NavigationActions } from 'react-navigation';
+import { connect } from 'react-redux';
 
 export default class SigninScreen extends Component {
     render() {
@@ -35,3 +36,16 @@ export default class SigninScreen extends Component {
         </View>)
     }
 }
+
+// const mapStateToProps=(state)=>{
+//     return {
+
+//     }
+// }
+// const mapDispatchToProps=(dispatch)=>{
+//     return {
+
+//     }
+// }
+
+// export default connect(mapStateToProps,mapDispatchToProps)(SigninScreen)
