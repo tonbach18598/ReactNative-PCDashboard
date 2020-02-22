@@ -4,66 +4,15 @@ import CustomHeader from '../components/custom_header'
 import { Card, Icon } from 'react-native-elements'
 import Colors from '../ultilities/colors'
 import Values from '../ultilities/values'
+import { connect } from 'react-redux'
+import { saveSchedules } from '../redux/actions/schedule_action'
 
-export default class TeachScreen extends Component {
-    state = {
-        schedules: [
-            {
-                "day": "Thứ hai",
-                "subjects": [
-                    {
-                        "id": "a94b9bad-972a-4bfc-8ba8-78e3c1d66fc6",
-                        "time": "09:20 - 11:30",
-                        "subject": "Mạch điện tử & kỹ thuật số",
-                        "teacherOrClass": "17VLTH",
-                        "day": "Thứ hai",
-                        "classId": "GV",
-                        "teacherId": "0441"
-                    }
-                ]
-            },
-            {
-                "day": "Thứ ba",
-                "subjects": []
-            },
-            {
-                "day": "Thứ tư",
-                "subjects": [
-                    {
-                        "id": "9ecb06a5-87c2-4817-a4d7-6eb7c2458876",
-                        "time": "12:30 - 15:00",
-                        "subject": "TH Cảm biến & Đo lường",
-                        "teacherOrClass": "16VLTH",
-                        "day": "Thứ tư",
-                        "classId": "GV",
-                        "teacherId": "0441"
-                    }
-                ]
-            },
-            {
-                "day": "Thứ năm",
-                "subjects": [
-                    {
-                        "id": "5fbafe54-18f0-4bf7-ba31-a78da7e6a8f5",
-                        "time": "08:30 - 10:10",
-                        "subject": "TH Mạch điện tử & kỹ thuật số",
-                        "teacherOrClass": "17VLTH",
-                        "day": "Thứ năm",
-                        "classId": "GV",
-                        "teacherId": "0441"
-                    }
-                ]
-            },
-            {
-                "day": "Thứ sáu",
-                "subjects": []
-            },
-            {
-                "day": "Thứ bảy",
-                "subjects": []
-            }
-        ]
+class TeachScreen extends Component {
+    
+    componentDidMount(){
+        this.props.fetchData()
     }
+
     render() {
         return (
             <View style={{ flex: 1 }}>
@@ -71,7 +20,7 @@ export default class TeachScreen extends Component {
                 <FlatList
                     style={{ flex: 1 }}
                     ListFooterComponent={<View style={{ height: 5 }} />}
-                    data={this.state.schedules}
+                    data={this.props.schedules}
                     renderItem={({ item }) => (
                         <Card containerStyle={{ borderRadius: 10,...Platform.select({
                             ios: {
@@ -126,3 +75,20 @@ export default class TeachScreen extends Component {
         )
     }
 }
+
+const mapStateToProps=(state)=>{
+    console.log(state.schedules)
+    return {
+        schedules:state.schedules,
+    }
+}
+
+const mapDispatchToProps=(dispatch)=>{
+    return {
+        fetchData:()=>{
+            dispatch(saveSchedules())
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(TeachScreen)

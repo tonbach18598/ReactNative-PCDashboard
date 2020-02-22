@@ -4,28 +4,13 @@ import Values from '../ultilities/values'
 import CustomHeader from '../components/custom_header'
 import Colors from '../ultilities/colors'
 import { Card, Avatar } from 'react-native-elements'
+import { saveUsers } from '../redux/actions/user_action'
+import { connect } from 'react-redux'
 
-export default class UserScreen extends Component {
+class UserScreen extends Component {
 
-    state = {
-        users: [
-            {
-                name: 'Bùi Ngô Tôn Bách',
-                avatar: 'https://scontent.fsgn5-2.fna.fbcdn.net/v/t1.0-9/79999145_1334532736719488_3223710544372432896_o.jpg?_nc_cat=105&_nc_ohc=k9BZY_K86JcAX8CrlnM&_nc_ht=scontent.fsgn5-2.fna&oh=cf6bee80b31aeca610d282fd9158f950&oe=5EC1FE2A',
-                userId: '1613013'
-            },
-            {
-                name: 'Bùi Ngô Tôn Bách',
-                avatar: 'https://scontent.fsgn5-2.fna.fbcdn.net/v/t1.0-9/79999145_1334532736719488_3223710544372432896_o.jpg?_nc_cat=105&_nc_ohc=k9BZY_K86JcAX8CrlnM&_nc_ht=scontent.fsgn5-2.fna&oh=cf6bee80b31aeca610d282fd9158f950&oe=5EC1FE2A',
-                userId: '1613013'
-            },
-            {
-                name: 'Bùi Ngô Tôn Bách',
-                avatar: 'https://scontent.fsgn5-2.fna.fbcdn.net/v/t1.0-9/79999145_1334532736719488_3223710544372432896_o.jpg?_nc_cat=105&_nc_ohc=k9BZY_K86JcAX8CrlnM&_nc_ht=scontent.fsgn5-2.fna&oh=cf6bee80b31aeca610d282fd9158f950&oe=5EC1FE2A',
-                userId: '1613013'
-            },
-            
-        ]
+    componentDidMount(){
+        this.props.fetchData('K16')
     }
     
     render() {
@@ -34,7 +19,8 @@ export default class UserScreen extends Component {
                 <CustomHeader title={Values.THIRD_YEAR_LIST.toUpperCase()} left={'arrow-back'} onPressLeft={() => { this.props.navigation.goBack() }} />
                 <FlatList
                     style={{ flex: 1, paddingBottom: 50 }}
-                    data={this.state.users}
+                    data={this.props.users}
+                    keyExtractor={item=>item.userId}
                     ListFooterComponent={<View style={{ height: 5 }} />}
                     renderItem={({ item }) => (
                         <TouchableOpacity>
@@ -68,3 +54,19 @@ export default class UserScreen extends Component {
         )
     }
 }
+
+const mapStateToProps=(state)=>{
+    return {
+        users:state.users
+    }
+}
+
+const mapDispatchToProps=(dispatch)=>{
+    return {
+        fetchData:(classId)=>{
+            dispatch(saveUsers(classId))
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(UserScreen)

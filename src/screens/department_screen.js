@@ -1,21 +1,23 @@
 import React, { Component } from 'react'
-import { View, Text, Image, FlatList } from 'react-native'
+import { View, Text, FlatList, Dimensions } from 'react-native'
+import FastImage from 'react-native-fast-image'
 import { Card } from 'react-native-elements'
 import CustomHeader from '../components/custom_header'
 import Colors from '../ultilities/colors'
 import Values from '../ultilities/values'
 import Optional from 'react-native-optional'
-import { saveDepartmentPosts } from '../reduxs/actions/department_action'
+import { saveDepartmentPosts } from '../redux/actions/department_action'
 import { connect } from 'react-redux'
 
 class DepartmentScreen extends Component {
-    posts=[]
 
     componentDidMount(){
         this.props.fetchData(10)
     }
 
     render() {
+        console.log('PropsUi')
+        console.log(this.props.posts.departmentPosts)
         return (
             <View style={{flex:1}}>
                 <CustomHeader title={Values.PHYSICS_COMPUTER_SCIENCE.toUpperCase()} left='menu' onPressLeft={() => { this.props.navigation.openDrawer() }} />
@@ -23,7 +25,7 @@ class DepartmentScreen extends Component {
                 style={{flex:1}}
                 keyExtractor={item=>item.id}
                 ListFooterComponent={<View style={{height:5}}/>}
-                data={this.props.departmentPosts}
+                data={this.props.posts}// phaii la cham posts vi ben duoi ban mapState sang props nay
                     renderItem={({ item }) => (
                         <Card containerStyle={{borderRadius:10,
                             ...Platform.select({
@@ -42,9 +44,10 @@ class DepartmentScreen extends Component {
                                 <Text style={{color:Colors.grey,fontSize:12,marginTop:5}}>{item.time}</Text>
                                 <Text style={{color:Colors.black,fontSize:14,marginTop:10,marginBottom:10}}>{item.content}</Text>
                                 <Optional test={item.image!==null}>
-                                <Image
-                                    style={{ width: '100%', height: 200,marginTop:5, borderRadius:10 }}
-                                    source={{ uri: item.image }}/>
+                                <FastImage
+                                    style={{width: '100%',height:200 ,marginTop:5, borderRadius:10 }}
+                                    source={{ uri: item.image }}
+                                />
                                 </Optional>
                             </View>
                         </Card>
@@ -57,6 +60,7 @@ class DepartmentScreen extends Component {
 
 const mapStateToProps=(state)=>{
     return {
+        posts:state.departmentPosts
     }
 }
 

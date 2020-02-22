@@ -8,27 +8,13 @@ import Routes from '../ultilities/routes'
 import Configs from '../ultilities/configs'
 import Axios from 'axios'
 import Optional from 'react-native-optional'
+import { connect } from 'react-redux'
+import {saveClassPosts} from '../redux/actions/class_action'
 
-export default class ClassScreen extends Component {
-    state={
-        posts:[]
-    }
+class ClassScreen extends Component {
 
     componentDidMount(){
-        Axios({
-            method:'GET',
-            url:Configs.baseUrl+Configs.classPath+'K16',
-            params:{'number':10},
-            headers:{ 'Content-Type': 'application/json',
-            'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNTc3MDkxNjAxLCJleHAiOjE2MDg2Mjc2MDF9.wNCingf553U0ZAo4N-_ZIKNPu9fzNtWOc3nQBhLeV-of5GUawEehZ0TUyCzrWxJMiN42qTVOObXSR5E_JE3_IA'}
-        }).then(response=>{
-            console.log(response.data)
-            this.setState({
-                posts:response.data
-            })
-        }).catch(error=>{
-            console.log(error)
-        })
+        this.props.fetchData(10,'K16')
     }
 
     render() {
@@ -50,7 +36,7 @@ export default class ClassScreen extends Component {
                     style={{ flex: 1 }}
                     keyExtractor={item=>item.id}
                     ListFooterComponent={<View style={{height:5}}/>}
-                    data={this.state.posts}
+                    data={this.props.posts}
                     renderItem={({ item }) => (
                         <Card containerStyle={{ borderRadius: 10,...Platform.select({
                             ios: {
@@ -97,3 +83,21 @@ export default class ClassScreen extends Component {
         )
     }
 }
+
+const mapStateToProps=(state)=>{
+    console.log('updated state')
+    console.log(state.classPosts)
+    return {
+        posts:state.classPosts
+    }
+}
+
+const mapDispatchToProps=(dispatch)=>{
+    return {
+        fetchData:(number,classId)=>{
+            dispatch(saveClassPosts(number,classId))
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(ClassScreen)
