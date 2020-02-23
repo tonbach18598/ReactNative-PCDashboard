@@ -2,7 +2,7 @@ import { READ_USERS} from './type'
 import Axios from 'axios'
 import Configs from '../../ultilities/configs'
 
-export const saveUsers=(classId)=>{
+export const loadUsers=(classId)=>{
     return (dispatch)=>{
         Axios({
             method:'GET',
@@ -17,8 +17,7 @@ export const saveUsers=(classId)=>{
     }
 }
 
-export const getUsers=(users)=>{
-    console.log(users)
+export const saveUsers=(users)=>{
     return {
         type:READ_USERS,
         users

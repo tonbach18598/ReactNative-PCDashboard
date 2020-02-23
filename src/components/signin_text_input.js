@@ -3,7 +3,7 @@ import { TextInput, Dimensions, View, Platform } from 'react-native';
 import Colors from '../ultilities/colors';
 import { Icon } from 'react-native-elements'
 
-const SigninTextInput = ({ icon, placeholder, style }) => (
+const SigninTextInput = ({ icon, placeholder, style, secureText, value, onChangeText }) => (
     <View style={[{
         backgroundColor: Colors.white, borderRadius: 30,
         ...Platform.select({
@@ -26,9 +26,12 @@ const SigninTextInput = ({ icon, placeholder, style }) => (
                 color={Colors.lightBlue} />
         </View>
         <TextInput
+            secureTextEntry={secureText}
+            value={value}
             style={{ flex: 1, ...Platform.select({ android: { marginTop: 5, marginBottom: 5 }, ios: { marginTop: 20, marginBottom: 20 } }) }}
             placeholder={placeholder}
-            selectionColor={Colors.orange} />
+            selectionColor={Colors.orange}
+            onChangeText={onChangeText} />
     </View>
 )
 

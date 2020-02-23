@@ -4,7 +4,7 @@ import Values from '../ultilities/values'
 import CustomHeader from '../components/custom_header'
 import Colors from '../ultilities/colors'
 import { Card, Avatar } from 'react-native-elements'
-import { saveUsers } from '../redux/actions/user_action'
+import { loadUsers } from '../redux/actions/user_action'
 import { connect } from 'react-redux'
 
 class UserScreen extends Component {
@@ -64,7 +64,7 @@ const mapStateToProps=(state)=>{
 const mapDispatchToProps=(dispatch)=>{
     return {
         fetchData:(classId)=>{
-            dispatch(saveUsers(classId))
+            dispatch(loadUsers(classId))
         }
     }
 }

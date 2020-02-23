@@ -5,25 +5,66 @@ import Logo from '../components/logo'
 import SigninTextInput from '../components/signin_text_input'
 import SigninButton from '../components/signin_button'
 import ForgetPasswordButton from '../components/forget_password_button'
+import { connect } from 'react-redux';
+import { forgetPassword } from '../redux/actions/forget_action';
+import Toast from 'react-native-simple-toast';
 
-export default class ForgetScreen extends Component {
+class ForgetScreen extends Component {
+
+    state = {
+        username: '',
+    }
+
     render() {
+        const { username } = this.state
         return (
-        <View style={{flexDirection:'column', width:Dimensions.get('window').width, height:Dimensions.get('window').height, alignItems:'center', justifyContent:'space-between'}}>
-            <Logo/>
-            <View>
-                <SigninTextInput
-                    icon='person'
-                    placeholder={Values.ACCOUNT}
-                    style={{marginTop:10, marginBottom:20}}/>
-                <ForgetPasswordButton 
-                    title={Values.BACK}
-                    onPress={()=>this.props.navigation.goBack()}/>
+            <View style={{ flexDirection: 'column', width: Dimensions.get('window').width, height: Dimensions.get('window').height, alignItems: 'center', justifyContent: 'space-between' }}>
+                <Logo />
+                <View>
+                    <SigninTextInput
+                        icon='person'
+                        placeholder={Values.ACCOUNT}
+                        style={{ marginTop: 10, marginBottom: 20 }}
+                        secureText={false}
+                        value={username}
+                        onChangeText={username => this.setState({ username })}
+                    />
+                    <ForgetPasswordButton
+                        title={Values.BACK}
+                        onPress={() => this.props.navigation.goBack()} />
+                </View>
+                <View>
+                    <SigninButton title={Values.GET_PASSWORD.toUpperCase()} onPress={() => { this.props.getPassword(username) }} />
+                    <View style={{ width: '100%', height: Dimensions.get('window').height / 10 }} />
+                </View>
             </View>
-            <View>
-                <SigninButton title={Values.GET_PASSWORD.toUpperCase() } onPress={()=>{}}/>
-                <View style={{width:'100%', height:Dimensions.get('window').height/10}}/>
-            </View>
-        </View>)
+        )
     }
 }
+
+const mapStateToProps = (state) => {
+    console.log('state toast '+state)
+    switch (state.forgetStatus) {
+        case -1:
+            Toast.showWithGravity('Tài khoản không được để trống', Toast.SHORT, Toast.CENTER)
+            break;
+        case 0:
+            Toast.showWithGravity('Lấy mật khẩu thất bại', Toast.SHORT, Toast.CENTER)
+            break;
+        case 1:
+            Toast.showWithGravity('Lấy mật khẩu thành công. Vui lòng kiểm tra trong email', Toast.SHORT, Toast.CENTER)
+            break
+    }
+    return {
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getPassword: (username) => {
+            dispatch(forgetPassword(username))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ForgetScreen)
