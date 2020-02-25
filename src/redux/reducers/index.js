@@ -5,6 +5,7 @@ import scheduleReducer from './schedule_reducer'
 import userReducer from './user_reducer'
 import forgetReducer from './forget_reducer'
 import signinReducer from './signin_reducer'
+import selfReducer from './self_reducer'
 
 const rootReducer=combineReducers(
     {
@@ -12,6 +13,7 @@ const rootReducer=combineReducers(
         classPosts:classReducer,
         schedules:scheduleReducer,
         users:userReducer,
+        self:selfReducer,
         signinStatus:signinReducer,
         forgetStatus:forgetReducer
     }

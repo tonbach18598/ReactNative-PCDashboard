@@ -8,6 +8,7 @@ import ForgetPasswordButton from '../components/forget_password_button'
 import { connect } from 'react-redux';
 import { forgetPassword } from '../redux/actions/forget_action';
 import Toast from 'react-native-simple-toast';
+import { WARNING, FAILURE, SUCCESS } from '../redux/actions/type';
 
 class ForgetScreen extends Component {
 
@@ -45,13 +46,13 @@ class ForgetScreen extends Component {
 const mapStateToProps = (state) => {
     console.log('state toast '+state)
     switch (state.forgetStatus) {
-        case -1:
+        case WARNING:
             Toast.showWithGravity('Tài khoản không được để trống', Toast.SHORT, Toast.CENTER)
             break;
-        case 0:
+        case FAILURE:
             Toast.showWithGravity('Lấy mật khẩu thất bại', Toast.SHORT, Toast.CENTER)
             break;
-        case 1:
+        case SUCCESS:
             Toast.showWithGravity('Lấy mật khẩu thành công. Vui lòng kiểm tra trong email', Toast.SHORT, Toast.CENTER)
             break
     }

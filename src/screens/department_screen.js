@@ -46,8 +46,7 @@ class DepartmentScreen extends Component {
                                 <Optional test={item.image !== null}>
                                     <FastImage
                                         style={{ width: '100%', height: 200, marginTop: 5, borderRadius: 10 }}
-                                        source={{ uri: item.image }}
-                                    />
+                                        source={{ uri: item.image }}/>
                                 </Optional>
                             </View>
                         </Card>

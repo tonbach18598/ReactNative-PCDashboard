@@ -10,14 +10,22 @@ import Colors from '../ultilities/colors';
 import Configs from '../ultilities/configs';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import QRCode from 'react-native-qrcode-svg';
+import Preferences from '../ultilities/preferences';
+import { connect } from 'react-redux';
+import { loadSelf } from '../redux/actions/self_action'
+import Optional from 'react-native-optional'
 
+class CustomDrawer extends Component {
 
-export default class CustomDrawer extends Component {
   navigateToScreen = (routeName) => () => {
     const navigateAction = NavigationActions.navigate({
       routeName: routeName
     })
     this.props.navigation.dispatch(navigateAction)
+  }
+
+  componentDidMount() {
+    this.props.initSelf()
   }
 
   render() {
@@ -28,58 +36,57 @@ export default class CustomDrawer extends Component {
           start={{ x: 0.0, y: 1.0 }}
           end={{ x: 1.0, y: 0.0 }}
           colors={['#448aff', '#2196f3', '#03a9f4', '#40c4ff']}>
-          <View style={{ justifyContent: 'flex-end', flex: 1, flexDirection: 'column', paddingLeft:20 }}>
-            <Avatar
-              rounded
-              size='large'
-              source={{
-                uri:
-                  'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-              }}
-            />
-            <Text style={{fontSize:18, fontWeight:'bold', color:Colors.white, marginTop:10}}>BÙI NGÔ TÔN BÁCH</Text>
-            <Text style={{color:Colors.white, marginBottom: 20}}>1613013</Text>
+          <View style={{ justifyContent: 'flex-end', flex: 1, flexDirection: 'column', paddingLeft: 20 }}>
+            <Optional test={this.props.self.avatar !== null}>
+              <Avatar
+                rounded
+                size='large'
+                source={{ uri: this.props.self.avatar }} />
+            </Optional>
+            <Optional test={this.props.self.name !== null}>
+              <Text style={{ fontSize: 18, fontWeight: 'bold', color: Colors.white, marginTop: 10 }}>{this.props.self.name.toUpperCase()}</Text>
+            </Optional>
+            <Optional test={this.props.self.userId !== null}>
+              <Text style={{ color: Colors.white, marginBottom: 20 }}>{this.props.self.userId}</Text>
+            </Optional>
           </View>
         </LinearGradient>
         <ListItem
           onPress={this.navigateToScreen(Routes.homeRoute)}
           title={Values.HOME_PAGE}
           titleStyle={{ fontSize: 14, fontWeight: 'bold' }}
-          leftIcon={{ name: 'home', color: Colors.lightBlue }}
-        />
+          leftIcon={{ name: 'home', color: Colors.lightBlue }} />
         <ListItem
           onPress={this.navigateToScreen(Routes.updateRoute)}
           title={Values.UPDATE_INFORMATION}
           titleStyle={{ fontSize: 14, fontWeight: 'bold' }}
-          leftIcon={{ name: 'account-circle', color: Colors.lightBlue }}
-        />
+          leftIcon={{ name: 'account-circle', color: Colors.lightBlue }} />
         <ListItem
           onPress={this.navigateToScreen(Routes.changeRoute)}
           title={Values.CHANGE_PASSWORD}
           titleStyle={{ fontSize: 14, fontWeight: 'bold' }}
-          leftIcon={{ name: 'settings', color: Colors.lightBlue }}
-        />
+          leftIcon={{ name: 'settings', color: Colors.lightBlue }} />
         <ListItem
           onPress={this.navigateToScreen(Routes.developerRoute)}
           title={Values.DEVELOPER}
           titleStyle={{ fontSize: 14, fontWeight: 'bold' }}
-          leftIcon={{ name: 'developer-mode', color: Colors.lightBlue }}
-        />
+          leftIcon={{ name: 'developer-mode', color: Colors.lightBlue }} />
         <ListItem
-          onPress={this.navigateToScreen(Routes.signinNavigator)}
+          onPress={async () => {
+            await Preferences.clearAll()
+            this.navigateToScreen(Routes.signinNavigator)
+          }}
           title={Values.SIGN_OUT}
           titleStyle={{ fontSize: 14, fontWeight: 'bold' }}
-          leftIcon={{ name: 'exit-to-app', color: Colors.lightBlue }}
-        />
+          leftIcon={{ name: 'exit-to-app', color: Colors.lightBlue }} />
         <ListItem
           title={Configs.currentVersion}
-          titleStyle={{ fontSize: 14, fontStyle: 'italic', color: Colors.grey }}
-        />
-        <View style={{paddingLeft:20, paddingTop: 10}}>
+          titleStyle={{ fontSize: 14, fontStyle: 'italic', color: Colors.grey }} />
+        <View style={{ paddingLeft: 20, paddingTop: 10 }}>
           <QRCode value='1613013'
-          size={100}
-          logo={require('../../assets/logo.png')}
-          logoSize={30}/>
+            size={100}
+            logo={require('../../assets/logo.png')}
+            logoSize={30} />
         </View>
       </View>
     );
@@ -88,4 +95,22 @@ export default class CustomDrawer extends Component {
 
 CustomDrawer.propTypes = {
   navigation: PropTypes.object
-};
+}
+
+const mapStateToProps = (state) => {
+  return {
+    self: state.self
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    initSelf: () => {
+      dispatch(loadSelf())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CustomDrawer)
+
+

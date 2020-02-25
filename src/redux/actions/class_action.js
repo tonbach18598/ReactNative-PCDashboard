@@ -1,26 +1,29 @@
-import {READ_CLASS_POSTS} from './type'
+import { READ_CLASS_POSTS } from './type'
 import Axios from 'axios'
 import Configs from '../../ultilities/configs'
+import Preferences from '../../ultilities/preferences'
 
-export const loadClassPosts=(number,classId)=>{
-    return (dispatch)=>{
+export const loadClassPosts = (number, classId) => {
+    return async (dispatch) => {
+        let token = await Preferences.loadToken()
         Axios({
-            method:'GET',
-            url:Configs.baseUrl+Configs.classPath+classId,
-            params:{'number':number},
-            headers:{
-            'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNTc3MDkxNjAxLCJleHAiOjE2MDg2Mjc2MDF9.wNCingf553U0ZAo4N-_ZIKNPu9fzNtWOc3nQBhLeV-of5GUawEehZ0TUyCzrWxJMiN42qTVOObXSR5E_JE3_IA'}
-        }).then(response=>{
+            method: 'GET',
+            url: Configs.baseUrl + Configs.classPath + classId,
+            params: { 'number': number },
+            headers: {
+                'Authorization': token
+            }
+        }).then(response => {
             dispatch(saveClassPosts(response.data))
-        }).catch(error=>{
+        }).catch(error => {
             console.log(error)
         })
     }
 }
 
-export const saveClassPosts=(classPosts)=>{
+export const saveClassPosts = (classPosts) => {
     return {
-        type:READ_CLASS_POSTS,
+        type: READ_CLASS_POSTS,
         classPosts
     }
 }

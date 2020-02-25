@@ -193,6 +193,8 @@ PODS:
     - React-cxxreact (= 0.61.5)
     - React-jsi (= 0.61.5)
   - React-jsinspector (0.61.5)
+  - react-native-image-picker (2.3.0):
+    - React
   - react-native-safe-area-context (0.6.4):
     - React
   - react-native-simple-toast (1.0.0):
@@ -282,6 +284,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
+  - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-simple-toast (from `../node_modules/react-native-simple-toast`)
   - "react-native-viewpager (from `../node_modules/@react-native-community/viewpager`)"
@@ -346,6 +349,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
+  react-native-image-picker:
+    :path: "../node_modules/react-native-image-picker"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-simple-toast:
@@ -411,6 +416,7 @@ SPEC CHECKSUMS:
   React-jsi: cb2cd74d7ccf4cffb071a46833613edc79cdf8f7
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
+  react-native-image-picker: e0b118c84e76f590a9d918baf06b0b043cbc5212
   react-native-safe-area-context: 042dfc9d4db17196841df962ba9497f6e7a5bd02
   react-native-simple-toast: 9c2f5979dfe555d0aa7b084348a06fd6ef7a6f55
   react-native-viewpager: 118e65d8c65c56fe48d12a35cdcf1fe7e027a366

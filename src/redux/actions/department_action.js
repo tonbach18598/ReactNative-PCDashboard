@@ -1,26 +1,29 @@
-import {READ_DEPARTMENT_POSTS} from './type'
+import { READ_DEPARTMENT_POSTS } from './type'
 import Axios from 'axios'
 import Configs from '../../ultilities/configs'
+import Preferences from '../../ultilities/preferences'
 
-export const loadDepartmentPosts=(number)=>{
-    return (dispatch)=>{
+export const loadDepartmentPosts = (number) => {
+    return async (dispatch) => {
+        let token = await Preferences.loadToken()
         Axios({
-            method:'GET',
-            url:Configs.baseUrl+Configs.departmentPath,
-            params:{'number':number},
-            headers:{ 
-            'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNTc3MDkxNjAxLCJleHAiOjE2MDg2Mjc2MDF9.wNCingf553U0ZAo4N-_ZIKNPu9fzNtWOc3nQBhLeV-of5GUawEehZ0TUyCzrWxJMiN42qTVOObXSR5E_JE3_IA'}
-        }).then(response=>{
+            method: 'GET',
+            url: Configs.baseUrl + Configs.departmentPath,
+            params: { 'number': number },
+            headers: {
+                'Authorization': token
+            }
+        }).then(response => {
             dispatch(saveDepartmentPosts(response.data))
-        }).catch(error=>{
+        }).catch(error => {
             console.log(error)
         })
     }
 }
 
-export const saveDepartmentPosts=(deparmentPosts)=>{
+export const saveDepartmentPosts = (deparmentPosts) => {
     return {
-        type:READ_DEPARTMENT_POSTS,
+        type: READ_DEPARTMENT_POSTS,
         deparmentPosts
     }
 }

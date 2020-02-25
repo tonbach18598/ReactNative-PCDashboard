@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Dimensions } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import Values from '../ultilities/values'
 import Logo from '../components/logo'
 import SigninTextInput from '../components/signin_text_input'
@@ -10,6 +10,7 @@ import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { getToken } from '../redux/actions/signin_action';
 import Toast from 'react-native-simple-toast'
+import { SUCCESS, FAILURE, WARNING } from '../redux/actions/type';
 
 class SigninScreen extends Component {
 
@@ -20,8 +21,8 @@ class SigninScreen extends Component {
 
     render() {
         const {username,password}=this.state
-        if(this.props.loading==1){
-            this.props.navigation.dispatch(NavigationActions.navigate({routeName:'DashboardNavigator'}))
+        if(this.props.loading===SUCCESS){
+            this.props.navigation.dispatch(NavigationActions.navigate({routeName:Routes.dashboardNavigator}))
         }
         return (
         <View style={{flexDirection:'column', width:Dimensions.get('window').width, height:Dimensions.get('window').height, alignItems:'center', justifyContent:'space-between'}}>
@@ -57,13 +58,13 @@ class SigninScreen extends Component {
 
 const mapStateToProps = (state) => {
     switch (state.signinStatus) {
-        case -1:
+        case WARNING:
             Toast.showWithGravity('Tài khoản hoặc mật khẩu không được để trống', Toast.SHORT, Toast.CENTER)
             break;
-        case 0:
+        case FAILURE:
             Toast.showWithGravity('Đăng nhập thất bại', Toast.SHORT, Toast.CENTER)
             break;
-        case 1:
+        case SUCCESS:
             Toast.showWithGravity('Đăng nhập thành công', Toast.SHORT, Toast.CENTER)
             break
     }
