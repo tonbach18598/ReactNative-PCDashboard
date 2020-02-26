@@ -1,6 +1,8 @@
 export const SUCCESS = 'SUCCESS'
 export const WARNING = 'WARNING'
 export const FAILURE = 'FAILURE'
+export const NOT_VALIDATED='NOT_VALIDATED'
+export const NOT_MATCHED='NOT_MATCHED'
 export const SIGN_IN = 'SIGN_IN'
 export const FORGET = 'FORGET'
 export const READ_DEPARTMENT_POSTS = 'READ_DEPARTMENT_POSTS'

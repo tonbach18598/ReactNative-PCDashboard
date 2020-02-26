@@ -9,10 +9,10 @@ export const loadClassPosts = (number, classId) => {
         Axios({
             method: 'GET',
             url: Configs.baseUrl + Configs.classPath + classId,
-            params: { 'number': number },
             headers: {
                 'Authorization': token
-            }
+            },
+            params: { 'number': number }
         }).then(response => {
             dispatch(saveClassPosts(response.data))
         }).catch(error => {

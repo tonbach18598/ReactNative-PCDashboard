@@ -9,10 +9,10 @@ export const loadDepartmentPosts = (number) => {
         Axios({
             method: 'GET',
             url: Configs.baseUrl + Configs.departmentPath,
-            params: { 'number': number },
             headers: {
                 'Authorization': token
-            }
+            },
+            params: { 'number': number }
         }).then(response => {
             dispatch(saveDepartmentPosts(response.data))
         }).catch(error => {

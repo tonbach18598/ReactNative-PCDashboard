@@ -6,6 +6,7 @@ import userReducer from './user_reducer'
 import forgetReducer from './forget_reducer'
 import signinReducer from './signin_reducer'
 import selfReducer from './self_reducer'
+import changeReducer from './change_reducer'
 
 const rootReducer=combineReducers(
     {
@@ -15,7 +16,8 @@ const rootReducer=combineReducers(
         users:userReducer,
         self:selfReducer,
         signinStatus:signinReducer,
-        forgetStatus:forgetReducer
+        forgetStatus:forgetReducer,
+        changeStatus:changeReducer
     }
 )
 

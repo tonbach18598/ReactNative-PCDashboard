@@ -44,7 +44,6 @@ class ForgetScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log('state toast '+state)
     switch (state.forgetStatus) {
         case WARNING:
             Toast.showWithGravity('Tài khoản không được để trống', Toast.SHORT, Toast.CENTER)

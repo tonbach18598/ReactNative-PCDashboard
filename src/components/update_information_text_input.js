@@ -3,7 +3,7 @@ import { TextInput, Dimensions, View, Platform } from 'react-native';
 import Colors from '../ultilities/colors';
 import { Icon } from 'react-native-elements'
 
-const UpdateInformationTextInput = ({ icon, placeholder, editable, color, style }) => (
+const UpdateInformationTextInput = ({ icon, placeholder, editable, color, style, secureText, value, onChangeText }) => (
     <View style={[{
         backgroundColor: Colors.white, borderRadius: 20, borderWidth: 2, borderColor: color,
         width: Dimensions.get('window').width / 1.2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'
@@ -15,10 +15,13 @@ const UpdateInformationTextInput = ({ icon, placeholder, editable, color, style 
                 color={color} />
         </View>
         <TextInput
+            secureTextEntry={secureText}
+            value={value}
             style={{ flex: 1, ...Platform.select({ ios: { marginTop: 15, marginBottom: 15 } }) }}
             placeholder={placeholder}
             selectionColor={Colors.orange}
-            editable={editable} />
+            editable={editable}
+            onChangeText={onChangeText} />
     </View>
 )
 

@@ -9,15 +9,15 @@ export const getToken = (username, password) => {
             Axios({
                 method: 'POST',
                 url: Configs.baseUrl + Configs.tokenPath,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 params: {
                     'account': 'TEACHER'
                 },
                 data: {
                     'userId': username,
                     'password': password
-                },
-                headers: {
-                    'Content-Type': 'application/json'
                 }
             }).then(async response => {
                 let token = response.data.tokenType + ' ' + response.data.accessToken

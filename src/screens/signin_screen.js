@@ -21,7 +21,7 @@ class SigninScreen extends Component {
 
     render() {
         const {username,password}=this.state
-        if(this.props.loading===SUCCESS){
+        if(this.props.response===SUCCESS){
             this.props.navigation.dispatch(NavigationActions.navigate({routeName:Routes.dashboardNavigator}))
         }
         return (
@@ -69,7 +69,7 @@ const mapStateToProps = (state) => {
             break
     }
     return {
-        loading:state.signinStatus
+        response:state.signinStatus
     }
 }
 

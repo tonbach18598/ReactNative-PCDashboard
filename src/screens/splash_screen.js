@@ -9,10 +9,10 @@ import Preferences from '../ultilities/preferences'
 export default class SplashScreen extends Component {
 
     componentDidMount() {
-        setTimeout(this.isSignin, 1000)
+        setTimeout(this.checkSignin, 1000)
     }
 
-    isSignin = async () => {
+    checkSignin = async () => {
         let token = await Preferences.loadToken()
         if (token === null || token === undefined)
             this.props.navigation.navigate(Routes.signinNavigator)
