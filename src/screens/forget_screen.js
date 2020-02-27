@@ -46,10 +46,10 @@ class ForgetScreen extends Component {
 const mapStateToProps = (state) => {
     switch (state.forgetStatus) {
         case INITIALIZATION:
-            break;
+            break
         case WARNING:
             Toast.showWithGravity('Tài khoản không được để trống', Toast.SHORT, Toast.CENTER)
-            break;
+            break
         case FAILURE:
             Toast.showWithGravity('Lấy mật khẩu thất bại', Toast.SHORT, Toast.CENTER)
             break;

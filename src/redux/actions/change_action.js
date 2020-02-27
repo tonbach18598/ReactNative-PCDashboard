@@ -1,4 +1,4 @@
-import { CHANGE_PASSWORD, SUCCESS, FAILURE, WARNING } from './type'
+import { CHANGE_PASSWORD, SUCCESS, FAILURE, WARNING, INITIALIZATION } from './type'
 import Axios from 'axios'
 import Configs from '../../ultilities/configs'
 import Preferences from '../../ultilities/preferences'
@@ -21,15 +21,16 @@ export const changePassword = (oldPassword, newPassword, retypePassword) => {
                     'newPassword': newPassword
                 }
             }).then(response => {
-                if (response.data)
-                    dispatch(onResponse(SUCCESS))
-                else
-                    dispatch(onResponse(FAILURE))
+                if (response.data) dispatch(onResponse(SUCCESS))
+                else dispatch(onResponse(FAILURE))
+                dispatch(onResponse(INITIALIZATION))
             }).catch(error => {
                 dispatch(onResponse(FAILURE))
                 console.log(error)
+                dispatch(onResponse(INITIALIZATION))
             })
         } else dispatch(onResponse(WARNING))
+        dispatch(onResponse(INITIALIZATION))
     }
 }
 

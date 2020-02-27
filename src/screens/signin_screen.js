@@ -10,7 +10,7 @@ import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { getToken } from '../redux/actions/signin_action';
 import Toast from 'react-native-simple-toast'
-import { SUCCESS, FAILURE, WARNING } from '../redux/actions/type';
+import { SUCCESS, FAILURE, WARNING, INITIALIZATION } from '../redux/actions/type';
 
 class SigninScreen extends Component {
 
@@ -58,12 +58,14 @@ class SigninScreen extends Component {
 
 const mapStateToProps = (state) => {
     switch (state.signinStatus) {
+        case INITIALIZATION:
+            break
         case WARNING:
             Toast.showWithGravity('Tài khoản hoặc mật khẩu không được để trống', Toast.SHORT, Toast.CENTER)
-            break;
+            break
         case FAILURE:
             Toast.showWithGravity('Đăng nhập thất bại', Toast.SHORT, Toast.CENTER)
-            break;
+            break
         case SUCCESS:
             Toast.showWithGravity('Đăng nhập thành công', Toast.SHORT, Toast.CENTER)
             break

@@ -1,4 +1,4 @@
-import { SIGN_IN, SUCCESS, FAILURE, WARNING } from './type'
+import { SIGN_IN, SUCCESS, FAILURE, WARNING, INITIALIZATION } from './type'
 import Axios from 'axios'
 import Configs from '../../ultilities/configs'
 import Preferences from '../../ultilities/preferences'
@@ -30,17 +30,20 @@ export const getToken = (username, password) => {
                     }
                 }).then(async response => {
                     await Preferences.saveSelf(response.data)
-                    console.log(response.data)
                     dispatch(onResponse(SUCCESS))
+                    dispatch(onResponse(INITIALIZATION))
                 }).catch(error => {
                     dispatch(onResponse(FAILURE))
                     console.log(error)
+                    dispatch(onResponse(INITIALIZATION))
                 })
             }).catch(error => {
                 dispatch(onResponse(FAILURE))
                 console.log(error)
+                dispatch(onResponse(INITIALIZATION))
             })
         } else dispatch(onResponse(WARNING))
+        dispatch(onResponse(INITIALIZATION))
     }
 }
 

@@ -7,7 +7,7 @@ import Colors from '../ultilities/colors'
 import SigninButton from '../components/signin_button'
 import { connect } from 'react-redux'
 import { changePassword } from '../redux/actions/change_action'
-import { NOT_VALIDATED, NOT_MATCHED, WARNING, SUCCESS, FAILURE } from '../redux/actions/type'
+import { NOT_VALIDATED, NOT_MATCHED, WARNING, SUCCESS, FAILURE, INITIALIZATION } from '../redux/actions/type'
 import Routes from '../ultilities/routes'
 import { NavigationActions } from 'react-navigation';
 import Toast from 'react-native-simple-toast'
@@ -72,18 +72,20 @@ class ChangeScreen extends Component {
 
 const mapStateToProps = (state) => {
     switch (state.changeStatus) {
+        case INITIALIZATION:
+            break
         case NOT_VALIDATED:
             Toast.showWithGravity('Mật khẩu không hợp lệ', Toast.SHORT, Toast.CENTER)
-            break;
+            break
         case NOT_MATCHED:
             Toast.showWithGravity('Mật khẩu mới nhập lại không khớp', Toast.SHORT, Toast.CENTER)
-            break;
+            break
         case WARNING:
             Toast.showWithGravity('Mật khẩu cũ hoặc mới không được để trống', Toast.SHORT, Toast.CENTER)
-            break;
+            break
         case FAILURE:
             Toast.showWithGravity('Thay đổi mật khẩu thất bại', Toast.SHORT, Toast.CENTER)
-            break;
+            break
         case SUCCESS:
             Toast.showWithGravity('Thay đổi mật khẩu thành công. Vui lòng đăng nhập lại', Toast.SHORT, Toast.CENTER)
             break
