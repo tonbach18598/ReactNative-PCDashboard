@@ -6,9 +6,9 @@ import SigninTextInput from '../components/signin_text_input'
 import SigninButton from '../components/signin_button'
 import ForgetPasswordButton from '../components/forget_password_button'
 import { connect } from 'react-redux';
-import { forgetPassword } from '../redux/actions/forget_action';
+import { forgetPassword, initialize } from '../redux/actions/forget_action';
 import Toast from 'react-native-simple-toast';
-import { WARNING, FAILURE, SUCCESS } from '../redux/actions/type';
+import { WARNING, FAILURE, SUCCESS,INITIALIZATION } from '../redux/actions/type';
 
 class ForgetScreen extends Component {
 
@@ -45,6 +45,8 @@ class ForgetScreen extends Component {
 
 const mapStateToProps = (state) => {
     switch (state.forgetStatus) {
+        case INITIALIZATION:
+            break;
         case WARNING:
             Toast.showWithGravity('Tài khoản không được để trống', Toast.SHORT, Toast.CENTER)
             break;

@@ -1,4 +1,4 @@
-import { FORGET} from '../actions/type'
+import { FORGET } from '../actions/type'
 
 const forgetReducer=(state=null,action)=>{
     switch(action.type){
