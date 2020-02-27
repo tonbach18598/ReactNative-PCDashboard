@@ -9,6 +9,7 @@ import SigninButton from '../components/signin_button'
 
 
 export default class UpdateScreen extends Component {
+    
     render() {
         return (
             <View style={{ flex: 1, flexDirection: 'column' }}>

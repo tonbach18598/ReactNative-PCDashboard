@@ -24,6 +24,13 @@ class CustomDrawer extends Component {
     this.props.navigation.dispatch(navigateAction)
   }
 
+  onSignout = () => async () => {
+    await Preferences.clearAll()
+    this.props.navigation.dispatch(NavigationActions.navigate({
+      routeName: Routes.signinNavigator
+    }))
+  }
+
   componentDidMount() {
     this.props.initSelf()
   }
@@ -72,10 +79,9 @@ class CustomDrawer extends Component {
           titleStyle={{ fontSize: 14, fontWeight: 'bold' }}
           leftIcon={{ name: 'developer-mode', color: Colors.lightBlue }} />
         <ListItem
-          onPress={async () => {
-            await Preferences.clearAll()
-            this.navigateToScreen(Routes.signinNavigator)
-          }}
+          onPress={
+            this.onSignout()
+          }
           title={Values.SIGN_OUT}
           titleStyle={{ fontSize: 14, fontWeight: 'bold' }}
           leftIcon={{ name: 'exit-to-app', color: Colors.lightBlue }} />
