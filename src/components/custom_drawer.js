@@ -51,7 +51,7 @@ class CustomDrawer extends Component {
                 source={{ uri: this.props.self.avatar }} />
             </Optional>
             <Optional test={this.props.self.name !== null}>
-              <Text style={{ fontSize: 18, fontWeight: 'bold', color: Colors.white, marginTop: 10 }}>{}</Text>
+              <Text style={{ fontSize: 18, fontWeight: 'bold', color: Colors.white, marginTop: 10 }}>{this.props.self.name.toUpperCase()}</Text>
             </Optional>
             <Optional test={this.props.self.userId !== null}>
               <Text style={{ color: Colors.white, marginBottom: 20 }}>{this.props.self.userId}</Text>

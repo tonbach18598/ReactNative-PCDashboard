@@ -13,7 +13,7 @@ export const loadUsers = (classId) => {
                 'Authorization': token
             }
         }).then(response => {
-            dispatch(getUsers(response.data))
+            dispatch(saveUsers(response.data))
         }).catch(error => {
             console.log(error)
         })
