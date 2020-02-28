@@ -3,14 +3,19 @@ import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native'
 import CustomHeader from '../components/custom_header'
 import Values from '../ultilities/values'
 import Colors from '../ultilities/colors'
-import { Card, Avatar, Button, Icon, Header } from 'react-native-elements'
+import { Card, Avatar, Button, Icon } from 'react-native-elements'
 import Routes from '../ultilities/routes'
 import Optional from 'react-native-optional'
 import { connect } from 'react-redux'
 import { loadClassPosts } from '../redux/actions/class_action'
 import { loadSelf } from '../redux/actions/self_action'
+import ActionSheet from 'react-native-actionsheet'
 
 class ClassScreen extends Component {
+
+    showActionSheet=()=>{
+        this.ActionSheet.show()
+    }
 
     componentDidMount() {
         this.props.fetchData(10, this.props.navigation.state.params.classId)
@@ -66,7 +71,7 @@ class ClassScreen extends Component {
                                         </View>
                                     </View>
 
-                                    <Button icon={<Icon name='more-horiz' color={Colors.lightBlue} />} type='clear' />
+                                    <Button icon={<Icon name='more-horiz' color={Colors.lightBlue} />} type='clear' onPress={this.showActionSheet}  />
                                 </View>
                                 <Text style={{ fontSize: 14, marginTop: 10, marginBottom: 5 }}>{item.content}</Text>
                                 <Optional test={item.image !== null}>
@@ -81,8 +86,14 @@ class ClassScreen extends Component {
                                 </TouchableOpacity>
                             </View>
                         </Card>
-                    )}
-                />
+                    )}/>
+                    <ActionSheet
+                        ref={o => this.ActionSheet = o}
+                        title={Values.OPTION}
+                        options={[Values.EDIT, Values.DELETE, Values.CANCEL]}
+                        cancelButtonIndex={2}
+                        destructiveButtonIndex={1}
+                        onPress={(index) => { /* do something */ }}/>
             </View>
         )
     }
