@@ -66,41 +66,41 @@ class UserScreen extends Component {
                             </Card>
                         </TouchableOpacity>
                     )}/>
-                    <RBSheet
-                        ref={ref => {this.RBSheet = ref}}
-                        height={Dimensions.get('window').height/2}
-                        duration={250}
-                        customStyles={{
-                            justifyContent: "center",
-                            alignItems: "center"}}>
-                        <View style={{height:'100%',justifyContent:'space-evenly', alignItems:'center',flexDirection:'column'}}>
-                            <Avatar
-                                rounded
-                                size='xlarge'
-                                source={{ uri: this.state.currentUser.avatar }} />
-                            <View style={{flexDirection:'column', alignItems:'center'}}>
-                                <Text style={{fontSize:20,fontWeight:'bold',color:Colors.blue, paddingTop:10, paddingBottom:10}}>{this.state.currentUser.name}</Text>
-                                <Text style={{fontSize:16,fontWeight:'bold',color:Colors.deepOrangeAccent}}>{this.state.currentUser.userId}</Text>
-                            </View>
-                            <View style={{flexDirection:'row',alignItems:'flex-start'}}>
-                                <View style={{flexDirection:'column'}}>
-                                    <TouchableOpacity onPress={()=>{}}>
-                                        <View style={{flexDirection:'row', alignItems:'center'}}>
-                                            <Icon name='email' color={Colors.lightBlue}/>
-                                            <Text style={{fontSize:16, paddingLeft:10}}>{this.state.currentUser.email}</Text>
-                                        </View>
-                                    </TouchableOpacity>
-                                    <View style={{height:10}}/>
-                                    <TouchableOpacity onPress={()=>{}}>
-                                        <View style={{flexDirection:'row', alignItems:'center'}}>
-                                            <Icon name='smartphone' color={Colors.lightBlue}/>
-                                            <Text style={{fontSize:16, paddingLeft:10}}>{this.state.currentUser.phone}</Text>
-                                        </View>
-                                    </TouchableOpacity>
-                                </View>
+                <RBSheet
+                    ref={ref => {this.RBSheet = ref}}
+                    height={Dimensions.get('window').height/2}
+                    duration={250}
+                    customStyles={{
+                        justifyContent: "center",
+                        alignItems: "center"}}>
+                    <View style={{height:'100%',justifyContent:'space-evenly', alignItems:'center',flexDirection:'column'}}>
+                        <Avatar
+                            rounded
+                            size='xlarge'
+                            source={{ uri: this.state.currentUser.avatar }} />
+                        <View style={{flexDirection:'column', alignItems:'center'}}>
+                            <Text style={{fontSize:20,fontWeight:'bold',color:Colors.blue, paddingTop:10, paddingBottom:10}}>{this.state.currentUser.name}</Text>
+                            <Text style={{fontSize:16,fontWeight:'bold',color:Colors.deepOrangeAccent}}>{this.state.currentUser.userId}</Text>
+                        </View>
+                        <View style={{flexDirection:'row',alignItems:'flex-start'}}>
+                            <View style={{flexDirection:'column'}}>
+                                <TouchableOpacity onPress={()=>{}}>
+                                    <View style={{flexDirection:'row', alignItems:'center'}}>
+                                        <Icon name='email' color={Colors.lightBlue}/>
+                                        <Text style={{fontSize:16, paddingLeft:10}}>{this.state.currentUser.email}</Text>
+                                    </View>
+                                </TouchableOpacity>
+                                <View style={{height:10}}/>
+                                <TouchableOpacity onPress={()=>{}}>
+                                    <View style={{flexDirection:'row', alignItems:'center'}}>
+                                        <Icon name='smartphone' color={Colors.lightBlue}/>
+                                        <Text style={{fontSize:16, paddingLeft:10}}>{this.state.currentUser.phone}</Text>
+                                    </View>
+                                </TouchableOpacity>
                             </View>
                         </View>
-                    </RBSheet>
+                    </View>
+                </RBSheet>
             </View>
         )
     }
