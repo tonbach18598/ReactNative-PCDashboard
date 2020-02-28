@@ -1,13 +1,30 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList, TouchableOpacity } from 'react-native'
-import Values from '../ultilities/values'
+import { View, Text, FlatList, TouchableOpacity, Dimensions } from 'react-native'
 import CustomHeader from '../components/custom_header'
 import Colors from '../ultilities/colors'
 import { Card, Avatar } from 'react-native-elements'
 import { loadUsers } from '../redux/actions/user_action'
 import { connect } from 'react-redux'
+import RBSheet from 'react-native-raw-bottom-sheet'
+import { Icon } from 'react-native-elements'
+
 
 class UserScreen extends Component {
+
+    state={
+        currentUser:{
+            'userAvatar':'',
+            'userName':'',
+            'userId':'',
+            'email':'',
+            'phone':''
+        }
+    }
+
+    showBottomSheet=(selectedUser)=>{
+        this.setState({currentUser:selectedUser})
+        this.RBSheet.open()
+    }
 
     componentDidMount(){
         this.props.fetchData(this.props.navigation.state.params.classId)
@@ -23,7 +40,7 @@ class UserScreen extends Component {
                     keyExtractor={item=>item.userId}
                     ListFooterComponent={<View style={{ height: 5 }} />}
                     renderItem={({ item }) => (
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={()=>{this.showBottomSheet(item)}}>
                             <Card containerStyle={{ borderRadius: 10,
                             ...Platform.select({
                             ios: {
@@ -48,8 +65,42 @@ class UserScreen extends Component {
                                 </View>
                             </Card>
                         </TouchableOpacity>
-                    )}
-                />
+                    )}/>
+                    <RBSheet
+                        ref={ref => {this.RBSheet = ref}}
+                        height={Dimensions.get('window').height/2}
+                        duration={250}
+                        customStyles={{
+                            justifyContent: "center",
+                            alignItems: "center"}}>
+                        <View style={{height:'100%',justifyContent:'space-evenly', alignItems:'center',flexDirection:'column'}}>
+                            <Avatar
+                                rounded
+                                size='xlarge'
+                                source={{ uri: this.state.currentUser.avatar }} />
+                            <View style={{flexDirection:'column', alignItems:'center'}}>
+                                <Text style={{fontSize:20,fontWeight:'bold',color:Colors.blue, paddingTop:10, paddingBottom:10}}>{this.state.currentUser.name}</Text>
+                                <Text style={{fontSize:16,fontWeight:'bold',color:Colors.deepOrangeAccent}}>{this.state.currentUser.userId}</Text>
+                            </View>
+                            <View style={{flexDirection:'row',alignItems:'flex-start'}}>
+                                <View style={{flexDirection:'column'}}>
+                                    <TouchableOpacity onPress={()=>{}}>
+                                        <View style={{flexDirection:'row', alignItems:'center'}}>
+                                            <Icon name='email' color={Colors.lightBlue}/>
+                                            <Text style={{fontSize:16, paddingLeft:10}}>{this.state.currentUser.email}</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    <View style={{height:10}}/>
+                                    <TouchableOpacity onPress={()=>{}}>
+                                        <View style={{flexDirection:'row', alignItems:'center'}}>
+                                            <Icon name='smartphone' color={Colors.lightBlue}/>
+                                            <Text style={{fontSize:16, paddingLeft:10}}>{this.state.currentUser.phone}</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                    </RBSheet>
             </View>
         )
     }

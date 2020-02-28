@@ -92,7 +92,7 @@ class ClassScreen extends Component {
                         title={Values.OPTION}
                         options={[Values.EDIT, Values.DELETE, Values.CANCEL]}
                         cancelButtonIndex={2}
-                        destructiveButtonIndex={1}
+                        destructiveButtonIndex={2}
                         onPress={(index) => { /* do something */ }}/>
             </View>
         )

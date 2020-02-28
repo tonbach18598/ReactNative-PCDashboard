@@ -36,7 +36,7 @@ class UpdateScreen extends Component {
                             <Avatar
                                 rounded
                                 size='xlarge'
-                                source={{ uri: this.props.self.avatar, }} />
+                                source={{ uri: this.props.self.avatar }} />
                         </Optional>
                         <Optional test={this.props.self.name !== null}>
                             <Text style={{ fontSize: 24, color: Colors.blue, fontWeight: 'bold', paddingTop: 20, paddingBottom: 5 }}>{this.props.self.name}</Text>
