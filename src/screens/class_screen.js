@@ -8,23 +8,27 @@ import Routes from '../ultilities/routes'
 import Optional from 'react-native-optional'
 import { connect } from 'react-redux'
 import { loadClassPosts } from '../redux/actions/class_action'
+import { loadSelf } from '../redux/actions/self_action'
 
 class ClassScreen extends Component {
 
     componentDidMount() {
-        this.props.fetchData(10, 'K16')
+        this.props.fetchData(10, this.props.navigation.state.params.classId)
+        this.props.initSelf()
     }
 
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <CustomHeader title={Values.THIRD_YEAR_CLASS.toUpperCase()} left={'arrow-back'} onPressLeft={() => { this.props.navigation.goBack() }} />
+                <CustomHeader title={this.props.navigation.state.params.title.toUpperCase()} left={'arrow-back'} onPressLeft={() => { this.props.navigation.goBack() }} />
                 <TouchableOpacity onPress={() => { this.props.navigation.navigate(Routes.postRoute) }}>
                     <View style={{ height: 56, backgroundColor: Colors.grey200, flexDirection: 'row', alignItems: 'center', paddingLeft: 20, paddingRight: 20, paddingTop: 10, paddingBottom: 10 }}>
-                        {/* <Avatar
-                            rounded
-                            size='small'
-                            source={{ uri: this.state.posts[0].userAvatar }} /> */}
+                        <Optional test={this.props.self.avatar !== null}>
+                            <Avatar
+                                rounded
+                                size='small'
+                                source={{ uri: this.props.self.avatar }} />
+                        </Optional>
                         <View style={{ flex: 1, backgroundColor: Colors.white, borderRadius: 25, height: 36, marginLeft: 20, justifyContent: 'center', alignItems: 'center' }}>
                             <Text style={{ color: Colors.grey }}>{Values.SHARE_YOUR_THINKING}</Text>
                         </View>
@@ -69,7 +73,7 @@ class ClassScreen extends Component {
                                     <Image style={{ width: '100%', height: 200, marginTop: 5, borderRadius: 10 }}
                                         source={{ uri: item.image }} />
                                 </Optional>
-                                <TouchableOpacity style={{ marginTop: 15 }} onPress={() => { this.props.navigation.navigate(Routes.commentRoute) }}>
+                                <TouchableOpacity style={{ marginTop: 15 }} onPress={() => { this.props.navigation.navigate(Routes.commentRoute,{postId:item.id}) }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                                         <Icon name='comment' color={Colors.lightBlue} />
                                         <Text style={{ fontSize: 16, fontWeight: 'bold', marginLeft: 5 }}>{Values.COMMENT}</Text>
@@ -85,15 +89,17 @@ class ClassScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log('updated state')
-    console.log(state.classPosts)
     return {
+        self:state.self,
         posts: state.classPosts
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        initSelf: () => {
+            dispatch(loadSelf())
+        },
         fetchData: (number, classId) => {
             dispatch(loadClassPosts(number, classId))
         }

@@ -14,7 +14,7 @@ export default class SessionScreen extends Component{
                 <View style={{flex:1,flexDirection:'column', margin:5}}>
                     <View style={{flex:1}}>
                         <TouchableOpacity 
-                        onPress={()=>{  this.props.navigation.navigate(Routes.classRoute, Values.THIRD_YEAR_CLASS)}}
+                        onPress={()=>{  this.props.navigation.navigate(Routes.classRoute, {classId:'3Y', title:Values.THIRD_YEAR_CLASS})}}
                         style={{flex:1, borderTopLeftRadius:Dimensions.get('window').height/4.4,borderTopRightRadius:Dimensions.get('window').height/4.4}}>
                             <LinearGradient
                                 style={{ flex:1, borderTopLeftRadius: Dimensions.get('window').height/4,borderTopRightRadius:Dimensions.get('window').height/4, alignItems: 'center', paddingTop: 10, paddingBottom: 10, height: 50, justifyContent: 'center' }}
@@ -28,7 +28,7 @@ export default class SessionScreen extends Component{
                     <View style={{height:5}}/>
                     <View style={{flex:1}}>
                         <TouchableOpacity 
-                        onPress={()=>{  this.props.navigation.navigate(Routes.classRoute, Values.FOURTH_YEAR_CLASS)}}
+                        onPress={()=>{  this.props.navigation.navigate(Routes.classRoute,  {classId:'4Y', title:Values.FOURTH_YEAR_CLASS})}}
                         style={{flex:1,borderBottomLeftRadius:Dimensions.get('window').height/4.4,borderBottomRightRadius:Dimensions.get('window').height/4.4}}>
                             <LinearGradient
                                 style={{ flex:1, borderBottomLeftRadius: Dimensions.get('window').height/4,borderBottomRightRadius:Dimensions.get('window').height/4, alignItems: 'center', paddingTop: 10, paddingBottom: 10, height: 50, justifyContent: 'center' }}

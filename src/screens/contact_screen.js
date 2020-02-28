@@ -13,7 +13,7 @@ export default class ContactScreen extends Component{
                 <View style={{flex:1,flexDirection:'column', margin:5}}>
                 <View style={{flex:1}}>
                         <TouchableOpacity
-                        onPress={()=>{  this.props.navigation.navigate(Routes.userRoute, Values.THIRD_YEAR_LIST)}}
+                        onPress={()=>{  this.props.navigation.navigate(Routes.userRoute, {classId:'3Y',title:Values.THIRD_YEAR_LIST})}}
                         style={{flex:1, borderTopLeftRadius:Dimensions.get('window').height/8.8, borderBottomRightRadius:Dimensions.get('window').height/8.8}}>
                             <LinearGradient
                                 style={{ flex:1, borderTopLeftRadius: Dimensions.get('window').height/8,borderBottomRightRadius:Dimensions.get('window').height/8, alignItems: 'center', paddingTop: 10, paddingBottom: 10, height: 50, justifyContent: 'center' }}
@@ -27,7 +27,7 @@ export default class ContactScreen extends Component{
                     <View style={{height:5}}/>
                     <View style={{flex:1}}>
                         <TouchableOpacity
-                        onPress={()=>{  this.props.navigation.navigate(Routes.userRoute, Values.FOURTH_YEAR_LIST)}}
+                        onPress={()=>{  this.props.navigation.navigate(Routes.userRoute, {classId:'4Y', title:Values.FOURTH_YEAR_LIST})}}
                         style={{flex:1, borderTopRightRadius:Dimensions.get('window').height/8.8, borderBottomLeftRadius:Dimensions.get('window').height/8.8}}>
                             <LinearGradient
                                 style={{ flex:1, borderTopRightRadius: Dimensions.get('window').height/8,borderBottomLeftRadius: Dimensions.get('window').height/8, alignItems: 'center', paddingTop: 10, paddingBottom: 10, height: 50, justifyContent: 'center' }}
@@ -41,7 +41,7 @@ export default class ContactScreen extends Component{
                     <View style={{height:5}}/>
                     <View style={{flex:1}}>
                         <TouchableOpacity
-                        onPress={()=>{  this.props.navigation.navigate(Routes.userRoute,Values.TEACHER_LIST)}}
+                        onPress={()=>{  this.props.navigation.navigate(Routes.userRoute,{classId:'GV',title:Values.TEACHER_LIST})}}
                         style={{flex:1,borderTopLeftRadius:Dimensions.get('window').height/8.8,borderBottomRightRadius:Dimensions.get('window').height/8.8}}>
                             <LinearGradient
                                 style={{ flex:1, borderTopLeftRadius: Dimensions.get('window').height/8,borderBottomRightRadius:Dimensions.get('window').height/8, alignItems: 'center', paddingTop: 10, paddingBottom: 10, height: 50, justifyContent: 'center' }}

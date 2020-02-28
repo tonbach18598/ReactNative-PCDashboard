@@ -7,16 +7,20 @@ import forgetReducer from './forget_reducer'
 import signinReducer from './signin_reducer'
 import selfReducer from './self_reducer'
 import changeReducer from './change_reducer'
+import updateReducer from './update_reducer'
+import commentReducer from './comment_reducer'
 
 const rootReducer=combineReducers(
     {
         departmentPosts:departmentReducer,
         classPosts:classReducer,
+        comments:commentReducer,
         schedules:scheduleReducer,
         users:userReducer,
         self:selfReducer,
         signinStatus:signinReducer,
         forgetStatus:forgetReducer,
+        updateStatus:updateReducer,
         changeStatus:changeReducer
     }
 )

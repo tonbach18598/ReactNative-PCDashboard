@@ -10,13 +10,13 @@ import { connect } from 'react-redux'
 class UserScreen extends Component {
 
     componentDidMount(){
-        this.props.fetchData('K16')
+        this.props.fetchData(this.props.navigation.state.params.classId)
     }
     
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <CustomHeader title={Values.THIRD_YEAR_LIST.toUpperCase()} left={'arrow-back'} onPressLeft={() => { this.props.navigation.goBack() }} />
+                <CustomHeader title={this.props.navigation.state.params.title.toUpperCase()} left={'arrow-back'} onPressLeft={() => { this.props.navigation.goBack() }} />
                 <FlatList
                     style={{ flex: 1, paddingBottom: 50 }}
                     data={this.props.users}

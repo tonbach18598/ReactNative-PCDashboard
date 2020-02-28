@@ -5,39 +5,13 @@ import CustomHeader from '../components/custom_header'
 import LinearGradient from 'react-native-linear-gradient'
 import Colors from '../ultilities/colors'
 import { Button, Icon, Avatar } from 'react-native-elements'
+import { loadComments } from '../redux/actions/comment_action'
+import { connect } from 'react-redux'
 
-export default class CommentScreen extends Component {
-    constructor(props){
-        super(props)
-        this.state={
-            comments:[
-                {
-                    avatar:'https://scontent.fsgn5-2.fna.fbcdn.net/v/t1.0-9/79999145_1334532736719488_3223710544372432896_o.jpg?_nc_cat=105&_nc_ohc=k9BZY_K86JcAX8CrlnM&_nc_ht=scontent.fsgn5-2.fna&oh=cf6bee80b31aeca610d282fd9158f950&oe=5EC1FE2A',
-                    name:'Bùi Ngô Tôn Bách',
-                    content:'Ứng dụng tuyệt vời',
-                    time:'10/02/2020 19:02'
-                },
-                {
-                    avatar:'https://scontent.fsgn5-2.fna.fbcdn.net/v/t1.0-9/79999145_1334532736719488_3223710544372432896_o.jpg?_nc_cat=105&_nc_ohc=k9BZY_K86JcAX8CrlnM&_nc_ht=scontent.fsgn5-2.fna&oh=cf6bee80b31aeca610d282fd9158f950&oe=5EC1FE2A',
-                    name:'Bùi Ngô Tôn Bách',
-                    content:'Ứng dụng tuyệt vời',
-                    time:'10/02/2020 19:02'
-                },
-                {
-                    avatar:'https://scontent.fsgn5-2.fna.fbcdn.net/v/t1.0-9/79999145_1334532736719488_3223710544372432896_o.jpg?_nc_cat=105&_nc_ohc=k9BZY_K86JcAX8CrlnM&_nc_ht=scontent.fsgn5-2.fna&oh=cf6bee80b31aeca610d282fd9158f950&oe=5EC1FE2A',
-                    name:'Bùi Ngô Tôn Bách',
-                    content:'Ứng dụng tuyệt vờidsfdsfdsfdsfsdfsdfsfsdfdsfdsfdsdfsdf fdfdsfdsf sdfdsf dsf dsf ds',
-                    time:'10/02/2020 19:02'
-                },
-                {
-                    avatar:'https://scontent.fsgn5-2.fna.fbcdn.net/v/t1.0-9/79999145_1334532736719488_3223710544372432896_o.jpg?_nc_cat=105&_nc_ohc=k9BZY_K86JcAX8CrlnM&_nc_ht=scontent.fsgn5-2.fna&oh=cf6bee80b31aeca610d282fd9158f950&oe=5EC1FE2A',
-                    name:'Bùi Ngô Tôn Bách',
-                    content:'Ứng dụng tuyệt vời',
-                    time:'10/02/2020 19:02'
-                },
-               
-            ]
-        }
+class CommentScreen extends Component {
+    
+    componentDidMount() {
+        this.props.fetchData(this.props.navigation.state.params.postId)
     }
 
     render() {
@@ -48,25 +22,24 @@ export default class CommentScreen extends Component {
                 style={{flex:1}}
                 keyExtractor={item=>item.id}
                 ListFooterComponent={<View style={{height:5}}/>}
-                data={this.state.comments}
+                data={this.props.comments}
                     renderItem={({ item }) => (
                         <View style={{flexDirection:'row', marginTop:5, marginBottom:4, marginLeft:10, marginRight:10}}>
                             <View style={{marginTop:10, marginRight:10}}>
                                 <Avatar
                                 rounded
                                 size='small'
-                                source={{ uri: item.avatar }} />
+                                source={{ uri: item.userAvatar }} />
                             </View>
                             <View style={{flexDirection:'column'}}>
                                 <View style={{backgroundColor:Colors.grey300, maxWidth:Dimensions.get('window').width*0.7, borderRadius:15, paddingTop:10, paddingBottom:10, paddingLeft:15, paddingRight:15}}>
-                                    <Text style={{fontSize:16, fontWeight:'bold', color:Colors.blue}}>{item.name}</Text>
+                                    <Text style={{fontSize:16, fontWeight:'bold', color:Colors.blue}}>{item.userName}</Text>
                                     <Text style={{fontSize:14}}>{item.content}</Text>
                                 </View>
                                 <Text style={{fontSize:12, color:Colors.grey, marginTop:5, marginLeft:15}}>{item.time}</Text>
                             </View>
                         </View>
-                    )}
-                />
+                    )}/>
                     <LinearGradient
                         style={{ width: Dimensions.get('window').width }}
                         start={{ x: 1.0, y: 0.0 }}
@@ -90,3 +63,19 @@ export default class CommentScreen extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        comments:state.comments,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchData: (postId) => {
+            dispatch(loadComments(postId))
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(CommentScreen)
