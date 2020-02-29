@@ -34,7 +34,7 @@ export const changePassword = (oldPassword, newPassword, retypePassword) => {
     }
 }
 
-export const onResponse = (status) => {
+const onResponse = (status) => {
     return {
         type: CHANGE_PASSWORD,
         status

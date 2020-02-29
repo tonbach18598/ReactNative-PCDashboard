@@ -21,7 +21,7 @@ export const forgetPassword = (username) => {
     }
 }
 
-export const onResponse = (status) => {
+const onResponse = (status) => {
     return {
         type: FORGET,
         status

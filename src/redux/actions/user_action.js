@@ -20,7 +20,7 @@ export const loadUsers = (classId) => {
     }
 }
 
-export const saveUsers = (users) => {
+const saveUsers = (users) => {
     return {
         type: READ_USERS,
         users

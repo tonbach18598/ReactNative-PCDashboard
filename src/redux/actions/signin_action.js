@@ -47,7 +47,7 @@ export const getToken = (username, password) => {
     }
 }
 
-export const onResponse = (status) => {
+const onResponse = (status) => {
     return {
         type: SIGN_IN,
         status

@@ -8,7 +8,7 @@ export const loadSelf = () => {
     }
 }
 
-export const saveSelf = (self) => {
+const saveSelf = (self) => {
     return {
         type: READ_SELF,
         self

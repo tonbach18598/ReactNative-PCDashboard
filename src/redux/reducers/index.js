@@ -8,13 +8,14 @@ import signinReducer from './signin_reducer'
 import selfReducer from './self_reducer'
 import changeReducer from './change_reducer'
 import updateReducer from './update_reducer'
-import commentReducer from './comment_reducer'
+import {readCommentReducer, writeCommentReducer} from './comment_reducer'
 
 const rootReducer=combineReducers(
     {
         departmentPosts:departmentReducer,
         classPosts:classReducer,
-        comments:commentReducer,
+        comments:readCommentReducer,
+        commentStatus:writeCommentReducer,
         schedules:scheduleReducer,
         users:userReducer,
         self:selfReducer,

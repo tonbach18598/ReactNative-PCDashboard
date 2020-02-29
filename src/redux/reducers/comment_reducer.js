@@ -1,6 +1,6 @@
-import {READ_COMMENTS} from '../actions/type'
+import {READ_COMMENTS, CREATE_COMMENT, UPDATE_COMMENT, DELETE_COMMENT} from '../actions/type'
 
-const commentReducer=(state=[],action)=>{
+export const readCommentReducer=(state=[],action)=>{
     switch(action.type){
         case READ_COMMENTS:
             return [...action.comments]
@@ -10,4 +10,17 @@ const commentReducer=(state=[],action)=>{
     }
 }
 
-export default commentReducer
+export const writeCommentReducer=(state=null,action)=>{
+    console.log('reducer '+action.type)
+    console.log('reducer 2 '+action.status)
+    switch(action.type){
+        case CREATE_COMMENT:
+            return action.status
+        case UPDATE_COMMENT:
+            return action.status
+        case DELETE_COMMENT:
+            return action.status
+        default:
+            return state
+    }
+}

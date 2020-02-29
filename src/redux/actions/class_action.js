@@ -21,7 +21,7 @@ export const loadClassPosts = (number, classId) => {
     }
 }
 
-export const saveClassPosts = (classPosts) => {
+const saveClassPosts = (classPosts) => {
     return {
         type: READ_CLASS_POSTS,
         classPosts

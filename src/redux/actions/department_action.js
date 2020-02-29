@@ -21,7 +21,7 @@ export const loadDepartmentPosts = (number) => {
     }
 }
 
-export const saveDepartmentPosts = (deparmentPosts) => {
+const saveDepartmentPosts = (deparmentPosts) => {
     return {
         type: READ_DEPARTMENT_POSTS,
         deparmentPosts

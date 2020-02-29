@@ -53,7 +53,7 @@ export const updateInformation = (email, phone) => {
     }
 }
 
-export const onResponse = (status) => {
+const onResponse = (status) => {
     return {
         type: UPDATE_INFORMATION,
         status

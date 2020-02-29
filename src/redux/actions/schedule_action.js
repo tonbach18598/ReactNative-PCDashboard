@@ -20,7 +20,7 @@ export const loadSchedules = () => {
     }
 }
 
-export const saveSchedules = (schedules) => {
+const saveSchedules = (schedules) => {
     return {
         type: READ_SCHEDULES,
         schedules
