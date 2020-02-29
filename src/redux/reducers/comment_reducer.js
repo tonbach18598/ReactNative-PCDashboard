@@ -1,4 +1,4 @@
-import {READ_COMMENTS, CREATE_COMMENT, UPDATE_COMMENT, DELETE_COMMENT} from '../actions/type'
+import {READ_COMMENTS, WRITE_COMMENT} from '../actions/type'
 
 export const readCommentReducer=(state=[],action)=>{
     switch(action.type){
@@ -11,14 +11,8 @@ export const readCommentReducer=(state=[],action)=>{
 }
 
 export const writeCommentReducer=(state=null,action)=>{
-    console.log('reducer '+action.type)
-    console.log('reducer 2 '+action.status)
     switch(action.type){
-        case CREATE_COMMENT:
-            return action.status
-        case UPDATE_COMMENT:
-            return action.status
-        case DELETE_COMMENT:
+        case WRITE_COMMENT:
             return action.status
         default:
             return state

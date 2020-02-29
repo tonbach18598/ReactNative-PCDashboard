@@ -1,4 +1,4 @@
-import { READ_COMMENTS, INITIALIZATION, CREATE_COMMENT, WARNING, UPDATE_COMMENT, DELETE_COMMENT, CREATE_COMMENT_FAILURE, CREATE_COMMENT_SUCCESS, UPDATE_COMMENT_SUCCESS, UPDATE_COMMENT_FAILURE, DELETE_COMMENT_FAILURE, DELETE_COMMENT_SUCCESS } from './type'
+import { READ_COMMENTS, INITIALIZATION, WARNING, WRITE_COMMENT, CREATE_COMMENT_FAILURE, CREATE_COMMENT_SUCCESS, UPDATE_COMMENT_SUCCESS, UPDATE_COMMENT_FAILURE, DELETE_COMMENT_FAILURE, DELETE_COMMENT_SUCCESS } from './type'
 import Axios from 'axios'
 import Configs from '../../ultilities/configs'
 import Preferences from '../../ultilities/preferences'
@@ -53,18 +53,18 @@ export const createComment = (postId,content) => {
                     }).catch(error => {
                         console.log(error)
                     })
-                    dispatch(onResponse(CREATE_COMMENT, CREATE_COMMENT_SUCCESS))
+                    dispatch(onResponse(CREATE_COMMENT_SUCCESS))
                 }
-                else dispatch(onResponse(CREATE_COMMENT, CREATE_COMMENT_FAILURE))
-                dispatch(onResponse(CREATE_COMMENT, INITIALIZATION))
+                else dispatch(onResponse(CREATE_COMMENT_FAILURE))
+                dispatch(onResponse(INITIALIZATION))
             }).catch(error => {
                 console.log(error)
-                dispatch(onResponse(CREATE_COMMENT, CREATE_COMMENT_FAILURE))
-                dispatch(onResponse(CREATE_COMMENT, INITIALIZATION))
+                dispatch(onResponse(CREATE_COMMENT_FAILURE))
+                dispatch(onResponse(INITIALIZATION))
             })
         } else {
-            dispatch(onResponse(CREATE_COMMENT, WARNING))
-            dispatch(onResponse(CREATE_COMMENT, INITIALIZATION))
+            dispatch(onResponse(WARNING))
+            dispatch(onResponse(INITIALIZATION))
         }
     }
 }
@@ -95,18 +95,18 @@ export const updateComment = (postId, commentId,content) => {
                     }).catch(error => {
                         console.log(error)
                     })
-                    dispatch(onResponse(UPDATE_COMMENT, UPDATE_COMMENT_SUCCESS))
+                    dispatch(onResponse(UPDATE_COMMENT_SUCCESS))
                 }
-                else dispatch(onResponse(UPDATE_COMMENT, UPDATE_COMMENT_FAILURE))
-                dispatch(onResponse(UPDATE_COMMENT, INITIALIZATION))
+                else dispatch(onResponse(UPDATE_COMMENT_FAILURE))
+                dispatch(onResponse(INITIALIZATION))
             }).catch(error => {
                 console.log(error)
-                dispatch(onResponse(UPDATE_COMMENT, UPDATE_COMMENT_FAILURE))
-                dispatch(onResponse(UPDATE_COMMENT, INITIALIZATION))
+                dispatch(onResponse(UPDATE_COMMENT_FAILURE))
+                dispatch(onResponse(INITIALIZATION))
             })
         } else {
-            dispatch(onResponse(UPDATE_COMMENT, WARNING))
-            dispatch(onResponse(UPDATE_COMMENT, INITIALIZATION))
+            dispatch(onResponse(WARNING))
+            dispatch(onResponse(INITIALIZATION))
         }
     }
 }
@@ -134,21 +134,21 @@ export const deleteComment = (postId,commentId) => {
                 }).catch(error => {
                     console.log(error)
                 })
-                dispatch(onResponse(DELETE_COMMENT, DELETE_COMMENT_SUCCESS))
+                dispatch(onResponse(DELETE_COMMENT_SUCCESS))
             }
-            else dispatch(onResponse(DELETE_COMMENT, DELETE_COMMENT_FAILURE))
-            dispatch(onResponse(DELETE_COMMENT, INITIALIZATION))
+            else dispatch(onResponse(DELETE_COMMENT_FAILURE))
+            dispatch(onResponse(INITIALIZATION))
         }).catch(error => {
             console.log(error)
-            dispatch(onResponse(DELETE_COMMENT, DELETE_COMMENT_FAILURE))
-            dispatch(onResponse(DELETE_COMMENT, INITIALIZATION))
+            dispatch(onResponse(DELETE_COMMENT_FAILURE))
+            dispatch(onResponse(INITIALIZATION))
         })
     }
 }
 
-const onResponse = (type, status) => {
+const onResponse = (status) => {
     return {
-        type: type,
+        type: WRITE_COMMENT,
         status
     }
 }
