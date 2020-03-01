@@ -4,26 +4,49 @@ import Values from '../ultilities/values'
 import CustomHeader from '../components/custom_header'
 import LinearGradient from 'react-native-linear-gradient'
 import Colors from '../ultilities/colors'
-import { Button, Icon, Avatar } from 'react-native-elements'
-import { loadComments, createComment, deleteComment } from '../redux/actions/comment_action'
+import { Button, Icon } from 'react-native-elements'
+import { loadComments, createComment, deleteComment, updateComment } from '../redux/actions/comment_action'
 import { connect } from 'react-redux'
 import { WARNING, INITIALIZATION, CREATE_COMMENT_FAILURE, CREATE_COMMENT_SUCCESS, UPDATE_COMMENT_FAILURE, UPDATE_COMMENT_SUCCESS, DELETE_COMMENT_FAILURE, DELETE_COMMENT_SUCCESS } from '../redux/actions/type'
 import Toast from 'react-native-simple-toast'
 import Swipeout from 'react-native-swipeout'
+import FastImage from 'react-native-fast-image'
+import Dialog from 'react-native-dialog'
 
 class CommentScreen extends Component {
     
-    state={
-        content:''
+    showDialog=(item)=>{
+        this.setState({
+            selectedComment:item,
+            dialogVisible:true
+        })
+    }
+
+    constructor(props){
+        super(props)
+        this.state={
+            content:'',
+            selectedComment:{
+                id:'',
+                content:''
+            },
+            dialogContent:'',
+            dialogVisible:false
+        }
     }
 
     componentDidMount() {
         this.props.fetchData(this.props.navigation.state.params.postId)
     }
 
+    componentWillUpdate(){
+        if(this.props.response===CREATE_COMMENT_SUCCESS)
+            this.setState({content:''})
+        if(this.props.response===UPDATE_COMMENT_SUCCESS)
+            this.setState({dialogVisible:false, dialogContent:''})
+    }
+
     render() {
-        const {content}=this.state
-        
         return (
             <View style={{ flex: 1 }}>
                 <CustomHeader title={Values.COMMENT.toUpperCase()} left={'arrow-back'} onPressLeft={() => { this.props.navigation.goBack() }} />
@@ -37,13 +60,14 @@ class CommentScreen extends Component {
                         <Swipeout
                             autoClose={true}
                             backgroundColor='transparent'
-                        right={[
+                            right={[
                                 {
                                     component:<View style={{justifyContent:'center',alignItems:'center', height:'100%'}}>
                                         <Icon name='edit'/>
                                         <Text>{Values.EDIT}</Text>
                                     </View>,
-                                    backgroundColor:Colors.orangeAccent
+                                    backgroundColor:Colors.orangeAccent,
+                                    onPress:()=>{this.showDialog(item)}
                                 },
                                 {
                                     component:<View style={{justifyContent:'center',alignItems:'center', height:'100%'}}>
@@ -56,10 +80,9 @@ class CommentScreen extends Component {
                             ]}>
                             <View style={{flexDirection:'row', marginTop:5, marginBottom:4, marginLeft:10, marginRight:10}}>
                                 <View style={{marginTop:10, marginRight:10}}>
-                                    <Avatar
-                                    rounded
-                                    size='small'
-                                    source={{ uri: item.userAvatar }} />
+                                    <FastImage
+                                        style={{ width: 40, height: 40, borderRadius: 20 }}
+                                        source={{ uri: item.userAvatar }} />
                                 </View>
                                 <View style={{flexDirection:'column'}}>
                                     <View style={{backgroundColor:Colors.grey300, maxWidth:Dimensions.get('window').width*0.7, borderRadius:15, paddingTop:10, paddingBottom:10, paddingLeft:15, paddingRight:15}}>
@@ -83,22 +106,32 @@ class CommentScreen extends Component {
                                     style={{ fontSize: 16, justifyContent: 'center', maxHeight:80, ...Platform.select({ ios: { marginTop: 15, marginBottom: 15 } }) }}
                                     placeholder={Values.ENTER_CONTENT}
                                     selectionColor={Colors.orange}
-                                    value={content}
-                                    onChangeText={content=>this.setState({content})}
-                                    />
+                                    value={this.state.content}
+                                    onChangeText={content=>this.setState({content})}/>
                             </View>
                             <View style={{flex:1, flexWrap:'wrap'}}>
-                                <Button icon={<Icon name='send' color={Colors.white} size={30} />} type="clear" onPress={() => {this.props.onSend(this.props.navigation.state.params.postId, content)}} />
+                                <Button icon={<Icon name='send' color={Colors.white} size={30} />} type="clear" onPress={() => {this.props.onSend(this.props.navigation.state.params.postId, this.state.content)}} />
                             </View>
                         </View>
                     </LinearGradient>
+                    <Dialog.Container visible={this.state.dialogVisible}>
+                        <Dialog.Title style={{color:Colors.deepOrangeAccent}}>{Values.EDIT_COMMENT.toUpperCase()}</Dialog.Title>
+                        <Dialog.Input value={this.state.dialogContent} onChangeText={dialogContent=>{this.setState({dialogContent})}}>
+                        </Dialog.Input>
+                        <Dialog.Button label={Values.CONFIRM} color={Colors.lightBlue} 
+                            onPress={()=>{
+                                if(this.state.dialogContent!=='')
+                                    this.props.onEdit(this.props.navigation.state.params.postId, this.state.selectedComment.id, this.state.dialogContent)
+                                else Toast.showWithGravity('Nội dung bình luận không được để trống', Toast.SHORT, Toast.CENTER)
+                                }}  />
+                        <Dialog.Button label={Values.CANCEL} onPress={()=>{this.setState({dialogVisible:false, dialogContent:''})}} color={Colors.blue} />
+                    </Dialog.Container>
             </View>
         )
     }
 }
 
 const mapStateToProps = (state) => {
-    console.log('screen '+state.commentStatus)
     switch (state.commentStatus) {
         case INITIALIZATION:
             break
@@ -109,7 +142,6 @@ const mapStateToProps = (state) => {
             Toast.showWithGravity('Gửi bình luận thất bại', Toast.SHORT, Toast.CENTER)
             break
         case CREATE_COMMENT_SUCCESS:
-            Toast.showWithGravity('Gửi bình luận thành công', Toast.SHORT, Toast.CENTER)
             break
         case UPDATE_COMMENT_FAILURE:
             Toast.showWithGravity('Sửa bình luận thất bại', Toast.SHORT, Toast.CENTER)
@@ -126,6 +158,7 @@ const mapStateToProps = (state) => {
     }
     return {
         comments:state.comments,
+        response:state.commentStatus
     }
 }
 
@@ -134,8 +167,8 @@ const mapDispatchToProps = (dispatch) => {
         onSend:(postId,content)=>{
             dispatch(createComment(postId,content))
         },
-        onEdit:()=>{
-
+        onEdit:(postId, commentId, content)=>{
+            dispatch(updateComment(postId, commentId, content))
         },
         onDelete:(postId, commentId)=>{
             dispatch(deleteComment(postId, commentId))

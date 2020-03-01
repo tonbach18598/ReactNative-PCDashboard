@@ -12,12 +12,14 @@ import { WARNING, FAILURE, SUCCESS,INITIALIZATION } from '../redux/actions/type'
 
 class ForgetScreen extends Component {
 
-    state = {
-        username: '',
+    constructor(props){
+        super(props)
+        this.state={
+            username:''
+        }
     }
 
     render() {
-        const { username } = this.state
         return (
             <View style={{ flexDirection: 'column', width: Dimensions.get('window').width, height: Dimensions.get('window').height, alignItems: 'center', justifyContent: 'space-between' }}>
                 <Logo />
@@ -27,7 +29,7 @@ class ForgetScreen extends Component {
                         placeholder={Values.ACCOUNT}
                         style={{ marginTop: 10, marginBottom: 20 }}
                         secureText={false}
-                        value={username}
+                        value={this.state.username}
                         onChangeText={username => this.setState({ username })}
                     />
                     <ForgetPasswordButton
@@ -35,7 +37,7 @@ class ForgetScreen extends Component {
                         onPress={() => this.props.navigation.goBack()} />
                 </View>
                 <View>
-                    <SigninButton title={Values.GET_PASSWORD.toUpperCase()} onPress={() => { this.props.getPassword(username) }} />
+                    <SigninButton title={Values.GET_PASSWORD.toUpperCase()} onPress={() => { this.props.getPassword(this.state.username) }} />
                     <View style={{ width: '100%', height: Dimensions.get('window').height / 10 }} />
                 </View>
             </View>

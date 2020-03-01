@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux'
 import departmentReducer from './department_reducer'
-import classReducer from './class_reducer'
+import {readClassReducer, writeClassReducer} from './class_reducer'
 import scheduleReducer from './schedule_reducer'
 import userReducer from './user_reducer'
 import forgetReducer from './forget_reducer'
@@ -13,7 +13,8 @@ import {readCommentReducer, writeCommentReducer} from './comment_reducer'
 const rootReducer=combineReducers(
     {
         departmentPosts:departmentReducer,
-        classPosts:classReducer,
+        classPosts:readClassReducer,
+        classStatus:writeClassReducer,
         comments:readCommentReducer,
         commentStatus:writeCommentReducer,
         schedules:scheduleReducer,

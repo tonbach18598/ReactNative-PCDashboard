@@ -1,20 +1,30 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native'
+import { View, Text, FlatList, TouchableOpacity } from 'react-native'
 import CustomHeader from '../components/custom_header'
 import Values from '../ultilities/values'
 import Colors from '../ultilities/colors'
-import { Card, Avatar, Button, Icon } from 'react-native-elements'
+import { Card, Button, Icon } from 'react-native-elements'
 import Routes from '../ultilities/routes'
 import Optional from 'react-native-optional'
 import { connect } from 'react-redux'
-import { loadClassPosts } from '../redux/actions/class_action'
+import { loadClassPosts, deletePost } from '../redux/actions/class_action'
 import { loadSelf } from '../redux/actions/self_action'
 import ActionSheet from 'react-native-actionsheet'
+import { INITIALIZATION, DELETE_CLASS_SUCCESS, DELETE_CLASS_FAILURE } from '../redux/actions/type'
+import Toast from 'react-native-simple-toast'
+import FastImage from 'react-native-fast-image'
 
 class ClassScreen extends Component {
 
     showActionSheet=()=>{
         this.ActionSheet.show()
+    }
+
+    constructor(props){
+        super(props)
+        this.state={
+            selectedPost:null
+        }
     }
 
     componentDidMount() {
@@ -26,13 +36,12 @@ class ClassScreen extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <CustomHeader title={this.props.navigation.state.params.title.toUpperCase()} left={'arrow-back'} onPressLeft={() => { this.props.navigation.goBack() }} />
-                <TouchableOpacity onPress={() => { this.props.navigation.navigate(Routes.postRoute) }}>
+                <TouchableOpacity onPress={() => { this.props.navigation.navigate(Routes.postRoute,{classId:this.props.navigation.state.params.classId}) }}>
                     <View style={{ height: 56, backgroundColor: Colors.grey200, flexDirection: 'row', alignItems: 'center', paddingLeft: 20, paddingRight: 20, paddingTop: 10, paddingBottom: 10 }}>
                         <Optional test={this.props.self.avatar !== null}>
-                            <Avatar
-                                rounded
-                                size='small'
-                                source={{ uri: this.props.self.avatar }} />
+                        <FastImage
+                            style={{ width: 50, height: 50, borderRadius: 25 }}
+                            source={{ uri: this.props.self.avatar }} />
                         </Optional>
                         <View style={{ flex: 1, backgroundColor: Colors.white, borderRadius: 25, height: 36, marginLeft: 20, justifyContent: 'center', alignItems: 'center' }}>
                             <Text style={{ color: Colors.grey }}>{Values.SHARE_YOUR_THINKING}</Text>
@@ -61,9 +70,8 @@ class ClassScreen extends Component {
                             <View style={{ flexDirection: 'column' }}>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                        <Avatar
-                                            rounded
-                                            size='small'
+                                        <FastImage
+                                            style={{ width: 40, height: 40, borderRadius: 20 }}
                                             source={{ uri: item.userAvatar }} />
                                         <View style={{ flexDirection: 'column', marginLeft: 20 }}>
                                             <Text style={{ fontSize: 16, color: Colors.blue, fontWeight: 'bold' }}>{item.userName}</Text>
@@ -71,11 +79,15 @@ class ClassScreen extends Component {
                                         </View>
                                     </View>
 
-                                    <Button icon={<Icon name='more-horiz' color={Colors.lightBlue} />} type='clear' onPress={this.showActionSheet}  />
+                                    <Button
+                                        icon={<Icon name='more-horiz' color={Colors.lightBlue} />} type='clear'
+                                        onPress={()=>{this.showActionSheet()
+                                            this.setState({selectedPost:item})
+                                        }}  />
                                 </View>
                                 <Text style={{ fontSize: 14, marginTop: 10, marginBottom: 5 }}>{item.content}</Text>
                                 <Optional test={item.image !== null}>
-                                    <Image style={{ width: '100%', height: 200, marginTop: 5, borderRadius: 10 }}
+                                    <FastImage style={{ width: '100%', height: 200, marginTop: 5, borderRadius: 10 }}
                                         source={{ uri: item.image }} />
                                 </Optional>
                                 <TouchableOpacity style={{ marginTop: 15 }} onPress={() => { this.props.navigation.navigate(Routes.commentRoute,{postId:item.id}) }}>
@@ -93,13 +105,34 @@ class ClassScreen extends Component {
                         options={[Values.EDIT, Values.DELETE, Values.CANCEL]}
                         cancelButtonIndex={2}
                         destructiveButtonIndex={2}
-                        onPress={(index) => { /* do something */ }}/>
+                        onPress={(index) => {
+                            switch(index){
+                                case 0:
+                                    if(this.state.selectedPost.userId===this.props.self.userId)
+                                        this.props.navigation.navigate(Routes.editRoute,{classId:this.props.navigation.state.params.classId, postId: this.state.selectedPost.id, content: this.state.selectedPost.content})
+                                    else Toast.showWithGravity('Sửa bài viết thất bại', Toast.SHORT, Toast.CENTER)
+                                    break
+                                case 1:
+                                    this.props.onDelete(this.props.navigation.state.params.classId, this.state.selectedPost.id)
+                                    break
+                            }
+                        }}/>
             </View>
         )
     }
 }
 
 const mapStateToProps = (state) => {
+    switch (state.classStatus) {
+        case INITIALIZATION:
+            break
+        case DELETE_CLASS_FAILURE:
+            Toast.showWithGravity('Xoá bài viết thất bại', Toast.SHORT, Toast.CENTER)
+            break
+        case DELETE_CLASS_SUCCESS:
+            Toast.showWithGravity('Xoá bài viết thành công', Toast.SHORT, Toast.CENTER)
+            break
+    }
     return {
         self:state.self,
         posts: state.classPosts
@@ -113,7 +146,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         fetchData: (number, classId) => {
             dispatch(loadClassPosts(number, classId))
-        }
+        },
+        onDelete:(classId, postId)=>{
+            dispatch(deletePost(classId, postId))
+        },
     }
 }
 

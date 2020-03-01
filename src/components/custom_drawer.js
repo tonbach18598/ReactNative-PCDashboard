@@ -4,7 +4,7 @@ import { NavigationActions } from 'react-navigation';
 import { View, Text } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient'
 import Routes from '../ultilities/routes';
-import { Avatar, ListItem } from 'react-native-elements';
+import { ListItem } from 'react-native-elements';
 import Values from '../ultilities/values';
 import Colors from '../ultilities/colors';
 import Configs from '../ultilities/configs';
@@ -14,6 +14,7 @@ import Preferences from '../ultilities/preferences';
 import { connect } from 'react-redux';
 import { loadSelf } from '../redux/actions/self_action'
 import Optional from 'react-native-optional'
+import FastImage from 'react-native-fast-image'
 
 class CustomDrawer extends Component {
 
@@ -45,10 +46,9 @@ class CustomDrawer extends Component {
           colors={['#448aff', '#2196f3', '#03a9f4', '#40c4ff']}>
           <View style={{ justifyContent: 'flex-end', flex: 1, flexDirection: 'column', paddingLeft: 20 }}>
             <Optional test={this.props.self.avatar !== null}>
-              <Avatar
-                rounded
-                size='large'
-                source={{ uri: this.props.self.avatar }} />
+            <FastImage
+              style={{ width: 80, height: 80, borderRadius: 40 }}
+              source={{ uri: this.props.self.avatar }} />
             </Optional>
             <Optional test={this.props.self.name !== null}>
               <Text style={{ fontSize: 18, fontWeight: 'bold', color: Colors.white, marginTop: 10 }}>{this.props.self.name.toUpperCase()}</Text>

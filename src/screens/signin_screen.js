@@ -14,16 +14,17 @@ import { SUCCESS, FAILURE, WARNING, INITIALIZATION } from '../redux/actions/type
 
 class SigninScreen extends Component {
 
-    state={
-        username:'',
-        password:'',
+    constructor(props){
+        super(props)
+        this.state={
+            username:'',
+            password:''
+        }
     }
 
     render() {
-        const {username,password}=this.state
-        if(this.props.response===SUCCESS){
+        if(this.props.response===SUCCESS)
             this.props.navigation.dispatch(NavigationActions.navigate({routeName:Routes.dashboardNavigator}))
-        }
         return (
         <View style={{flexDirection:'column', width:Dimensions.get('window').width, height:Dimensions.get('window').height, alignItems:'center', justifyContent:'space-between'}}>
             <Logo/>
@@ -33,7 +34,7 @@ class SigninScreen extends Component {
                     icon='person'
                     placeholder={Values.ACCOUNT}
                     style={{marginTop:10, marginBottom:10}}
-                    value={username}
+                    value={this.state.username}
                     onChangeText={username=>this.setState({username})}
                     />
                 <SigninTextInput
@@ -41,7 +42,7 @@ class SigninScreen extends Component {
                     icon='lock'
                     placeholder={Values.PASSWORD}
                     style={{marginTop:10, marginBottom:20}}
-                    value={password}
+                    value={this.state.password}
                     onChangeText={password=>this.setState({password})}
                     />
                 <ForgetPasswordButton
@@ -49,7 +50,7 @@ class SigninScreen extends Component {
                     onPress={()=>this.props.navigation.push(Routes.forgetRoute)}/>
             </View>
             <View>
-                <SigninButton title={Values.SIGN_IN.toUpperCase() } onPress={()=>{this.props.onSignin(username,password)}}/>
+                <SigninButton title={Values.SIGN_IN.toUpperCase() } onPress={()=>{this.props.onSignin(this.state.username,this.state.password)}}/>
                 <View style={{width:'100%', height:Dimensions.get('window').height/10}}/>
             </View>
         </View>)

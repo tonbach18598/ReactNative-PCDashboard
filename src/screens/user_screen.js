@@ -2,27 +2,31 @@ import React, { Component } from 'react'
 import { View, Text, FlatList, TouchableOpacity, Dimensions } from 'react-native'
 import CustomHeader from '../components/custom_header'
 import Colors from '../ultilities/colors'
-import { Card, Avatar } from 'react-native-elements'
+import { Card } from 'react-native-elements'
 import { loadUsers } from '../redux/actions/user_action'
 import { connect } from 'react-redux'
 import RBSheet from 'react-native-raw-bottom-sheet'
 import { Icon } from 'react-native-elements'
+import FastImage from 'react-native-fast-image'
 
 
 class UserScreen extends Component {
 
-    state={
-        currentUser:{
-            'userAvatar':'',
-            'userName':'',
-            'userId':'',
-            'email':'',
-            'phone':''
+    constructor(props){
+        super(props)
+        this.state={
+            selectedUser:{
+                userAvatar:'',
+                userName:'',
+                userId:'',
+                email:'',
+                phone:''
+            }
         }
     }
 
-    showBottomSheet=(selectedUser)=>{
-        this.setState({currentUser:selectedUser})
+    showBottomSheet=(item)=>{
+        this.setState({selectedUser:item})
         this.RBSheet.open()
     }
 
@@ -53,10 +57,9 @@ class UserScreen extends Component {
                                 elevation: 5
                             }
                         }) }}>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Avatar
-                                        rounded
-                                        size='medium'
+                                <View style={{ flexDirection: 'row', alignItems:'center' }}>
+                                    <FastImage
+                                        style={{ width: Dimensions.get('window').width/6, height: Dimensions.get('window').width/6, borderRadius: Dimensions.get('window').width/12 }}
                                         source={{ uri: item.avatar }} />
                                     <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
                                         <Text style={{ fontSize: 18, color: Colors.blue, fontWeight: 'bold' }}>{item.name}</Text>
@@ -74,27 +77,26 @@ class UserScreen extends Component {
                         justifyContent: "center",
                         alignItems: "center"}}>
                     <View style={{height:'100%',justifyContent:'space-evenly', alignItems:'center',flexDirection:'column'}}>
-                        <Avatar
-                            rounded
-                            size='xlarge'
-                            source={{ uri: this.state.currentUser.avatar }} />
+                        <FastImage
+                            style={{ width: Dimensions.get('window').height/4, height: Dimensions.get('window').height/4, borderRadius: Dimensions.get('window').height/8 }}
+                            source={{ uri: this.state.selectedUser.avatar }} />
                         <View style={{flexDirection:'column', alignItems:'center'}}>
-                            <Text style={{fontSize:20,fontWeight:'bold',color:Colors.blue, paddingTop:10, paddingBottom:10}}>{this.state.currentUser.name}</Text>
-                            <Text style={{fontSize:16,fontWeight:'bold',color:Colors.deepOrangeAccent}}>{this.state.currentUser.userId}</Text>
+                            <Text style={{fontSize:20,fontWeight:'bold',color:Colors.blue, paddingTop:10, paddingBottom:10}}>{this.state.selectedUser.name}</Text>
+                            <Text style={{fontSize:16,fontWeight:'bold',color:Colors.deepOrangeAccent}}>{this.state.selectedUser.userId}</Text>
                         </View>
                         <View style={{flexDirection:'row',alignItems:'flex-start'}}>
                             <View style={{flexDirection:'column'}}>
                                 <TouchableOpacity onPress={()=>{}}>
                                     <View style={{flexDirection:'row', alignItems:'center'}}>
                                         <Icon name='email' color={Colors.lightBlue}/>
-                                        <Text style={{fontSize:16, paddingLeft:10}}>{this.state.currentUser.email}</Text>
+                                        <Text style={{fontSize:16, paddingLeft:10}}>{this.state.selectedUser.email}</Text>
                                     </View>
                                 </TouchableOpacity>
                                 <View style={{height:10}}/>
                                 <TouchableOpacity onPress={()=>{}}>
                                     <View style={{flexDirection:'row', alignItems:'center'}}>
                                         <Icon name='smartphone' color={Colors.lightBlue}/>
-                                        <Text style={{fontSize:16, paddingLeft:10}}>{this.state.currentUser.phone}</Text>
+                                        <Text style={{fontSize:16, paddingLeft:10}}>{this.state.selectedUser.phone}</Text>
                                     </View>
                                 </TouchableOpacity>
                             </View>

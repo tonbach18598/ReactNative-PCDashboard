@@ -69,7 +69,7 @@ export const createComment = (postId,content) => {
     }
 }
 
-export const updateComment = (postId, commentId,content) => {
+export const updateComment = (postId, commentId, content) => {
     return async (dispatch) => {
         if(content!==''){
             let token = await Preferences.loadToken()

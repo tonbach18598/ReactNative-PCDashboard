@@ -15,18 +15,18 @@ import Toast from 'react-native-simple-toast'
 
 class ChangeScreen extends Component {
 
-    state = {
-        oldPassword: '',
-        newPassword: '',
-        retypePassword: ''
+    constructor(props){
+        super(props)
+        this.state = {
+            oldPassword: '',
+            newPassword: '',
+            retypePassword: ''
+        }
     }
 
     render() {
-        const { oldPassword, newPassword, retypePassword } = this.state
-
-        if (this.props.response === SUCCESS) {
+        if (this.props.response === SUCCESS) 
             this.props.navigation.dispatch(NavigationActions.navigate({ routeName: Routes.signinNavigator }))
-        }
 
         return (
             <View style={{ flex: 1, flexDirection: 'column' }}>
@@ -40,7 +40,7 @@ class ChangeScreen extends Component {
                             placeholder={Values.OLD_PASSWORD}
                             icon='vpn-key' editable={true}
                             color={Colors.lightBlue}
-                            value={oldPassword}
+                            value={this.state.oldPassword}
                             onChangeText={oldPassword => this.setState({ oldPassword })} />
                         <UpdateInformationTextInput
                             secureText={true}
@@ -49,7 +49,7 @@ class ChangeScreen extends Component {
                             editable={true}
                             color={Colors.orange}
                             style={{ marginTop: 10, marginBottom: 10 }}
-                            value={newPassword}
+                            value={this.state.newPassword}
                             onChangeText={newPassword => this.setState({ newPassword })} />
                         <UpdateInformationTextInput
                             secureText={true}
@@ -57,12 +57,12 @@ class ChangeScreen extends Component {
                             icon='lock-outline'
                             editable={true}
                             color={Colors.orange}
-                            value={retypePassword}
+                            value={this.state.retypePassword}
                             onChangeText={retypePassword => this.setState({ retypePassword })} />
                         <View style={{ height: Dimensions.get('window').height / 10 }} />
                         <SigninButton
                             title={Values.CONFIRM.toUpperCase()}
-                            onPress={() => {this.props.onConfirm(oldPassword,newPassword,retypePassword)}} />
+                            onPress={() => {this.props.onConfirm(this.state.oldPassword, this.state.newPassword, this.state.retypePassword)}} />
                     </View>
                 </ScrollView>
             </View>
