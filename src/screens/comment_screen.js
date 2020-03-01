@@ -18,7 +18,8 @@ class CommentScreen extends Component {
     showDialog=(item)=>{
         this.setState({
             selectedComment:item,
-            dialogVisible:true
+            dialogVisible:true,
+            dialogContent:item.content
         })
     }
 
