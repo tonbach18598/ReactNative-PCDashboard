@@ -10,9 +10,7 @@ import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { getToken } from '../redux/actions/signin_action';
 import Toast from 'react-native-simple-toast'
-import { SUCCESS, FAILURE, WARNING, INITIALIZATION, LOADING } from '../redux/actions/type';
-import Spinkit from 'react-native-spinkit'
-import Colors from '../ultilities/colors';
+import { SUCCESS, FAILURE, WARNING, INITIALIZATION } from '../redux/actions/type';
 
 class SigninScreen extends Component {
 
@@ -21,23 +19,15 @@ class SigninScreen extends Component {
         this.state={
             username:'',
             password:'',
-            loading:false
         }
     }
 
     componentWillUpdate(){
-        if(this.props.response===LOADING){
-            this.setState({loading:true})
-        } else if(this.props.response===SUCCESS){
-            this.setState({loading:false})
+       if(this.props.response===SUCCESS)
             this.props.navigation.dispatch(NavigationActions.navigate({routeName:Routes.dashboardNavigator}))
-        } else if(this.props.response===FAILURE){
-            this.setState({loading:false})
-        }
     }
 
     render() {
-        
         return (
         <View style={{flexDirection:'column', width:Dimensions.get('window').width, height:Dimensions.get('window').height, alignItems:'center', justifyContent:'space-between'}}>
             <Logo/>

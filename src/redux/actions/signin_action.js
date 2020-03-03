@@ -1,11 +1,10 @@
-import { SIGN_IN, SUCCESS, FAILURE, WARNING, INITIALIZATION, LOADING } from './type'
+import { SIGN_IN, SUCCESS, FAILURE, WARNING, INITIALIZATION } from './type'
 import Axios from 'axios'
 import Configs from '../../ultilities/configs'
 import Preferences from '../../ultilities/preferences'
 
 export const getToken = (username, password) => {
     return (dispatch) => {
-        dispatch(onResponse(LOADING))
         if (username !== '' && password !== '') {
             Axios({
                 method: 'POST',
