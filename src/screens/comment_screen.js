@@ -12,6 +12,7 @@ import Toast from 'react-native-simple-toast'
 import Swipeout from 'react-native-swipeout'
 import FastImage from 'react-native-fast-image'
 import Dialog from 'react-native-dialog'
+import { loadSelf } from '../redux/actions/self_action'
 
 class CommentScreen extends Component {
     
@@ -38,12 +39,13 @@ class CommentScreen extends Component {
 
     componentDidMount() {
         this.props.fetchData(this.props.navigation.state.params.postId)
+        this.props.initSelf()
     }
 
     componentWillUpdate(){
         if(this.props.response===CREATE_COMMENT_SUCCESS)
             this.setState({content:''})
-        if(this.props.response===UPDATE_COMMENT_SUCCESS)
+        else if(this.props.response===UPDATE_COMMENT_SUCCESS)
             this.setState({dialogVisible:false, dialogContent:''})
     }
 
@@ -68,7 +70,11 @@ class CommentScreen extends Component {
                                         <Text>{Values.EDIT}</Text>
                                     </View>,
                                     backgroundColor:Colors.orangeAccent,
-                                    onPress:()=>{this.showDialog(item)}
+                                    onPress:()=>{
+                                        if(item.userId===this.props.self.userId)
+                                            this.showDialog(item)
+                                        else Toast.showWithGravity('Sửa bình luận thất bại', Toast.SHORT, Toast.CENTER)
+                                    }
                                 },
                                 {
                                     component:<View style={{justifyContent:'center',alignItems:'center', height:'100%'}}>
@@ -159,7 +165,8 @@ const mapStateToProps = (state) => {
     }
     return {
         comments:state.comments,
-        response:state.commentStatus
+        response:state.commentStatus,
+        self: state.self
     }
 }
 
@@ -173,6 +180,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         onDelete:(postId, commentId)=>{
             dispatch(deleteComment(postId, commentId))
+        },
+        initSelf: () => {
+            dispatch(loadSelf())
         },
         fetchData: (postId) => {
             dispatch(loadComments(postId))
