@@ -1,6 +1,7 @@
 export const SUCCESS = 'SUCCESS'
 export const WARNING = 'WARNING'
 export const FAILURE = 'FAILURE'
+export const LOADING='LOADING'
 export const NOT_VALIDATED='NOT_VALIDATED'
 export const NOT_MATCHED='NOT_MATCHED'
 export const INITIALIZATION='INITIALIZATION'

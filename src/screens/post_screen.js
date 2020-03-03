@@ -21,21 +21,21 @@ class PostScreen extends Component {
             title: 'Chọn hình ảnh',
             storageOptions: {
               skipBackup: true,
-              path: 'images',
+              path: 'images'
             },
           }, (response) => {
           
             if (response.didCancel) {
-              console.log('User cancelled image picker');
+              console.log('User cancelled image picker')
             } else if (response.error) {
-              console.log('ImagePicker Error: ', response.error);
+              console.log('ImagePicker Error: ', response.error)
             } else {
-              const source = { uri: response.uri };
+              const source = { uri: response.uri }
               this.setState({
-                imageSource: source,
-              });
+                imageSource: source
+              })
             }
-          });
+          })
     }
 
     constructor(props){

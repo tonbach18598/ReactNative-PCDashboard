@@ -200,6 +200,8 @@ PODS:
   - react-native-simple-toast (1.0.0):
     - React
     - Toast (~> 4.0.0)
+  - react-native-spinkit (1.4.1):
+    - React
   - react-native-viewpager (3.3.0):
     - React
   - react-native-webview (8.0.6):
@@ -287,6 +289,7 @@ DEPENDENCIES:
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-simple-toast (from `../node_modules/react-native-simple-toast`)
+  - react-native-spinkit (from `../node_modules/react-native-spinkit`)
   - "react-native-viewpager (from `../node_modules/@react-native-community/viewpager`)"
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -355,6 +358,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-simple-toast:
     :path: "../node_modules/react-native-simple-toast"
+  react-native-spinkit:
+    :path: "../node_modules/react-native-spinkit"
   react-native-viewpager:
     :path: "../node_modules/@react-native-community/viewpager"
   react-native-webview:
@@ -419,6 +424,7 @@ SPEC CHECKSUMS:
   react-native-image-picker: e0b118c84e76f590a9d918baf06b0b043cbc5212
   react-native-safe-area-context: 042dfc9d4db17196841df962ba9497f6e7a5bd02
   react-native-simple-toast: 9c2f5979dfe555d0aa7b084348a06fd6ef7a6f55
+  react-native-spinkit: da294fd828216ad211fe36a5c14c1e09f09e62db
   react-native-viewpager: 118e65d8c65c56fe48d12a35cdcf1fe7e027a366
   react-native-webview: e11b5d7da61ac3acee13f3ae3184d417f773c5d5
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
