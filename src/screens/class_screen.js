@@ -40,7 +40,7 @@ class ClassScreen extends Component {
                     <View style={{ height: 56, backgroundColor: Colors.grey200, flexDirection: 'row', alignItems: 'center', paddingLeft: 20, paddingRight: 20, paddingTop: 10, paddingBottom: 10 }}>
                         <Optional test={this.props.self.avatar !== null}>
                         <FastImage
-                            style={{ width: 50, height: 50, borderRadius: 25 }}
+                            style={{ width: 40, height: 40, borderRadius: 20 }}
                             source={{ uri: this.props.self.avatar }} />
                         </Optional>
                         <View style={{ flex: 1, backgroundColor: Colors.white, borderRadius: 25, height: 36, marginLeft: 20, justifyContent: 'center', alignItems: 'center' }}>

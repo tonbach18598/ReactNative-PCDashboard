@@ -47,7 +47,7 @@ class CustomDrawer extends Component {
           <View style={{ justifyContent: 'flex-end', flex: 1, flexDirection: 'column', paddingLeft: 20 }}>
             <Optional test={this.props.self.avatar !== null}>
             <FastImage
-              style={{ width: 80, height: 80, borderRadius: 40 }}
+              style={{ width: 70, height: 70, borderRadius: 35 }}
               source={{ uri: this.props.self.avatar }} />
             </Optional>
             <Optional test={this.props.self.name !== null}>
