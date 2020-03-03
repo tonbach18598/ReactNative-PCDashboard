@@ -33,7 +33,8 @@ export const createPost = (classId, content, image) => {
         const formData=new FormData()
         formData.append('classId', classId)
         formData.append('content', content)
-        formData.append('file', {uri: image.uri, type:'image/jpg', name: 'image'})
+        if(image!==null)
+            formData.append('file', {uri: image.uri, type:'image/jpg', name: 'image'})
         if (content !== '') {
             let token = await Preferences.loadToken()
             Axios({
