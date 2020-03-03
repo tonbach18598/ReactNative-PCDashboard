@@ -79,7 +79,7 @@ class EditScreen extends Component {
                                 <Text style={{ fontSize: 16, color: Colors.white }}>{Values.ADD_IMAGE}</Text>
                             </View>
                             <View style={{ flex: 1, flexWrap: 'wrap' }}>
-                                <Button icon={<Icon name='image' color={Colors.white} size={30} />} type="clear" onPress={() => { }} />
+                                <Icon name='image' color={Colors.white} size={30} />
                             </View>
                         </View>
                     </LinearGradient>

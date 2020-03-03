@@ -12,13 +12,37 @@ import { createPost } from '../redux/actions/class_action'
 import { INITIALIZATION, WARNING, CREATE_CLASS_FAILURE, CREATE_CLASS_SUCCESS } from '../redux/actions/type'
 import Toast from 'react-native-simple-toast'
 import FastImage from 'react-native-fast-image'
+import ImagePicker from 'react-native-image-picker'
 
 class PostScreen extends Component {
+
+    getImage=()=>{
+        ImagePicker.launchImageLibrary({
+            title: 'Chọn hình ảnh',
+            storageOptions: {
+              skipBackup: true,
+              path: 'images',
+            },
+          }, (response) => {
+          
+            if (response.didCancel) {
+              console.log('User cancelled image picker');
+            } else if (response.error) {
+              console.log('ImagePicker Error: ', response.error);
+            } else {
+              const source = { uri: response.uri };
+              this.setState({
+                imageSource: source,
+              });
+            }
+          });
+    }
 
     constructor(props){
         super(props)
         this.state={
-            content:''
+            content:'',
+            imageSource:null
         }
     }
 
@@ -32,7 +56,6 @@ class PostScreen extends Component {
     }
 
     render() {
-
         return (
             <View style={{ flex: 1 }}>
                 <CustomHeader
@@ -40,7 +63,7 @@ class PostScreen extends Component {
                     left={'arrow-back'}
                     onPressLeft={() => { this.props.navigation.goBack() }}
                     right={'file-upload'}
-                    onPressRight={() => {this.props.onSend(this.props.navigation.state.params.classId, this.state.content, null)}} />
+                    onPressRight={() => {this.props.onSend(this.props.navigation.state.params.classId, this.state.content, this.state.imageSource)}} />
                     
                 <ScrollView>
                     <View style={{ flex: 1, flexDirection: 'column', marginTop: 10, marginBottom: 20 }}>
@@ -66,10 +89,11 @@ class PostScreen extends Component {
                             placeholder={Values.YOUR_THINKING}
                             value={this.state.content}
                             onChangeText={content=>this.setState({content})}/>
+                        <FastImage source={this.state.imageSource} style={{width:Dimensions.get('window').width, height:300}}/>
                     </View>
                 </ScrollView>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>{this.getImage()}}>
                     <LinearGradient
                         style={{ width: Dimensions.get('window').width }}
                         start={{ x: 1.0, y: 0.0 }}
@@ -80,7 +104,7 @@ class PostScreen extends Component {
                                 <Text style={{ fontSize: 16, color: Colors.white }}>{Values.ADD_IMAGE}</Text>
                             </View>
                             <View style={{ flex: 1, flexWrap: 'wrap' }}>
-                                <Button icon={<Icon name='image' color={Colors.white} size={30} />} type="clear" onPress={() => { }} />
+                                <Icon name='image' color={Colors.white} size={30} />
                             </View>
                         </View>
                     </LinearGradient>

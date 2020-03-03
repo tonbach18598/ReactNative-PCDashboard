@@ -30,27 +30,28 @@ const saveClassPosts = (classPosts) => {
 
 export const createPost = (classId, content, image) => {
     return async (dispatch) => {
+        const formData=new FormData()
+        formData.append('classId', classId)
+        formData.append('content', content)
+        formData.append('file', {uri: image.uri, type:'image/jpg', name: 'image'})
         if (content !== '') {
             let token = await Preferences.loadToken()
             Axios({
                 method: 'POST',
                 url: Configs.baseUrl + Configs.classPath,
                 headers: {
-                    'Authorization': token
+                    'Authorization': token,
+                    'Content-Type': 'multipart/form-data'
                 },
-                params: {
-                    'classId': classId,
-                    'content': content,
-                }
+                data: formData
             }).then(response => {
-                console.log('create action')
-
                 if (response.data) {
                     Axios({
                         method: 'GET',
                         url: Configs.baseUrl + Configs.classPath + classId,
                         headers: {
-                            'Authorization': token
+                            'Authorization': token,
+                            'Content-Type':'application/json'
                         },
                         params: { 'number': 10 }
                     }).then(response => {
@@ -119,7 +120,6 @@ export const updatePost = (classId, postId, content) => {
 
 export const deletePost = (classId, postId) => {
     return async (dispatch) => {
-        console.log('delete cmt 1')
         let token = await Preferences.loadToken()
         Axios({
             method: 'DELETE',
