@@ -43,7 +43,7 @@ class UpdateScreen extends Component {
                             <Text style={{ fontSize: 24, color: Colors.blue, fontWeight: 'bold', paddingTop: 20, paddingBottom: 5 }}>{this.props.self.name}</Text>
                         </Optional>
                         <Optional test={this.props.self.userId !== null}>
-                            <Text style={{ fontSize: 20, color: Colors.deepOrangeAccent, fontWeight: 'bold' }}>Giảng viên</Text>
+                            <Text style={{ fontSize: 20, color: Colors.deepOrangeAccent, fontWeight: 'bold' }}>{this.props.self.userId}</Text>
                         </Optional>
                     </View>
                     <View>
